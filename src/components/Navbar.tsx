@@ -1,28 +1,35 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isPastHero, setIsPastHero] = useState(false);
 
-  const updateNavbar = useCallback(() => {
+  useEffect(() => {
     const heroSection = document.getElementById('hero');
-    const heroThreshold = heroSection ? heroSection.offsetHeight - 80 : 550;
-    setIsPastHero(window.scrollY >= heroThreshold);
+    if (!heroSection) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsPastHero(!entry.isIntersecting);
+      },
+      { rootMargin: '-76px 0px 0px 0px', threshold: 0 }
+    );
+
+    observer.observe(heroSection);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    window.addEventListener('scroll', updateNavbar, { passive: true });
-    window.addEventListener('resize', updateNavbar, { passive: true });
-    updateNavbar();
-    return () => {
-      window.removeEventListener('scroll', updateNavbar);
-      window.removeEventListener('resize', updateNavbar);
+    if (!menuOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false);
     };
-  }, [updateNavbar]);
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [menuOpen]);
 
   const closeMobileMenu = () => setMenuOpen(false);
 
@@ -60,7 +67,7 @@ export default function Navbar() {
 
           <a
             href="#contact"
-            className="hidden lg:flex items-center justify-center bg-navy text-white font-bold text-sm tracking-wide rounded-full px-6 py-2.5 hover:bg-blue transition-colors duration-200 shadow-sm hover:shadow"
+            className="hidden lg:flex items-center justify-center bg-navy text-white font-bold text-sm tracking-wide rounded-full px-6 py-2.5 hover:opacity-80 transition-all duration-200 shadow-sm hover:shadow"
           >
             Get in Touch
           </a>
@@ -70,6 +77,8 @@ export default function Navbar() {
             id="menu-btn"
             type="button"
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
             className="lg:hidden flex flex-col gap-[5px] cursor-pointer p-1"
             onClick={() => setMenuOpen((o) => !o)}
           >
@@ -116,7 +125,7 @@ export default function Navbar() {
           <li>
             <a
               href="#contact"
-              className="font-bold text-white bg-navy rounded-full px-5 py-2 text-sm inline-block"
+              className="font-bold text-white bg-navy rounded-full px-5 py-2 text-sm inline-block hover:opacity-80 transition-opacity duration-200"
               onClick={closeMobileMenu}
             >
               Get in Touch

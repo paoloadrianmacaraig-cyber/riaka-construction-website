@@ -38,9 +38,10 @@ export default function AboutSection() {
           <div className="flex-shrink-0 w-full lg:w-[42%] rounded-2xl overflow-hidden border-4 border-white shadow-2xl">
             <Image
               src="/about/about-project.png"
-              alt="RIAKA project"
+              alt="RIAKA Construction Project"
               width={700}
               height={450}
+              sizes="(max-width: 1024px) 100vw, 42vw"
               className="w-full h-64 lg:h-80 object-cover"
             />
           </div>

@@ -40,10 +40,10 @@ export default function ProjectsSection() {
           </div>
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2.5 text-navy font-extrabold text-xs sm:text-sm uppercase tracking-[1.4px] hover:text-blue transition-colors self-start md:self-auto"
+            className="group inline-flex items-center gap-2.5 text-[#5c5b5b] font-extrabold text-xs sm:text-sm uppercase tracking-[1.4px] hover:text-gray-900 transition-colors duration-200 self-start md:self-auto"
           >
             <span>Inquire about custom projects</span>
-            <span className="w-7 h-7 rounded-full bg-navy/10 group-hover:bg-blue group-hover:text-white flex items-center justify-center transition-all duration-200">
+            <span className="w-7 h-7 rounded-full bg-[#5c5b5b]/10 group-hover:bg-gray-900 group-hover:text-white flex items-center justify-center transition-all duration-200">
               <svg
                 className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
                 fill="none"
@@ -105,9 +105,9 @@ export default function ProjectsSection() {
         <div className="mt-10 text-center">
           <a
             href="#contact"
-            className="group inline-flex items-center gap-3 bg-navy hover:bg-blue text-white font-extrabold text-xs sm:text-sm uppercase tracking-[1.4px] px-9 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5"
+            className="group inline-flex items-center gap-2.5 bg-navy text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3 sm:py-3.5 rounded-full hover:opacity-90 transition-all duration-200 shadow-xl hover:-translate-y-0.5"
           >
-            <span>See more completed projects</span>
+            <span>See More Completed Projects</span>
             <ArrowRight />
           </a>
         </div>

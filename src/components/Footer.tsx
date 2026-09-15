@@ -7,21 +7,22 @@ const FacebookIcon = () => (
 );
 
 const EmailIcon = () => (
-  <svg className="w-4 h-4 text-navy mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+  <svg className="w-4 h-4 text-navy flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
   </svg>
 );
 
 const PhoneIcon = () => (
-  <svg className="w-4 h-4 text-navy mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+  <svg className="w-4 h-4 text-navy flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
   </svg>
 );
 
 const MapPinIcon = () => (
-  <svg className="w-4 h-4 text-navy mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+  <svg className="w-4 h-4 text-navy flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+    <circle cx="12" cy="10" r="3" />
   </svg>
 );
 
@@ -54,7 +55,11 @@ export default function Footer() {
               Focused mainly on building safe, durable and high-quality homes; general construction
               of multi-storey buildings; and complete architectural solutions.
             </p>
-            <span className="inline-block bg-gray-100 text-navy text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-md">
+            <span className="inline-flex items-center gap-1.5 bg-navy/5 text-navy text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border border-navy/10">
+              <svg className="w-3.5 h-3.5 text-navy flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
               Licensed Construction Contractor
             </span>
           </div>
@@ -65,30 +70,36 @@ export default function Footer() {
               Contact Info
             </p>
             <ul className="text-[#5c5b5b] text-sm space-y-3.5">
-              <li className="flex items-start gap-2.5">
-                <EmailIcon />
-                <a href="mailto:riaka.construction@yahoo.com" className="hover:text-blue transition-colors">
+              <li className="flex items-center gap-3">
+                <span className="w-8 h-8 rounded-full bg-navy/5 flex items-center justify-center flex-shrink-0">
+                  <EmailIcon />
+                </span>
+                <a href="mailto:riaka.construction@yahoo.com" className="footer-link hover:text-gray-900 transition-colors">
                   riaka.construction@yahoo.com
                 </a>
               </li>
-              <li className="flex items-start gap-2.5">
-                <PhoneIcon />
-                <a href="tel:+639184080396" className="hover:text-blue transition-colors">
+              <li className="flex items-center gap-3">
+                <span className="w-8 h-8 rounded-full bg-navy/5 flex items-center justify-center flex-shrink-0">
+                  <PhoneIcon />
+                </span>
+                <a href="tel:+639184080396" className="footer-link hover:text-gray-900 transition-colors">
                   0918 408 0396
                 </a>
               </li>
-              <li className="flex items-start gap-2.5">
-                <MapPinIcon />
-                <span>M.H. Del Pilar St., Lemery, Philippines, 4209</span>
+              <li className="flex items-start gap-3">
+                <span className="w-8 h-8 rounded-full bg-navy/5 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <MapPinIcon />
+                </span>
+                <span className="leading-relaxed pt-1">M.H. Del Pilar St., Lemery, Philippines, 4209</span>
               </li>
             </ul>
-            <div className="mt-5">
+            <div className="mt-6">
               <a
                 href="https://www.facebook.com/RIAKAconstruction"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit RIAKA Construction Facebook Page"
-                className="inline-flex items-center gap-2.5 bg-[#4b5563] hover:bg-[#1f2937] text-white px-4 py-2.5 rounded-xl font-bold text-xs shadow-sm transition-all duration-200 hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2.5 bg-navy hover:opacity-90 text-white px-5 py-2.5 rounded-full font-bold text-xs shadow-sm hover:shadow transition-all duration-200 hover:-translate-y-0.5"
               >
                 <FacebookIcon />
                 <span>Follow us on Facebook</span>
@@ -106,7 +117,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="hover:text-blue hover:translate-x-1 transition-all inline-block"
+                    className="footer-link hover:text-gray-900 transition-colors"
                   >
                     {link.label}
                   </a>
@@ -120,9 +131,9 @@ export default function Footer() {
         <div className="border-t border-gray-200 pt-8 mt-12 flex flex-col sm:flex-row items-center justify-between text-xs text-[#5c5b5b] gap-4">
           <p>&copy; Riaka Construction and Development Corporation. All Rights Reserved 2026.</p>
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-navy transition-colors">Privacy Policy</a>
+            <a href="#" className="footer-link hover:text-gray-900 transition-colors">Privacy Policy</a>
             <span>&bull;</span>
-            <a href="#" className="hover:text-navy transition-colors">Terms &amp; Conditions</a>
+            <a href="#" className="footer-link hover:text-gray-900 transition-colors">Terms &amp; Conditions</a>
           </div>
         </div>
       </div>

@@ -32,20 +32,20 @@ function Counter({ target, suffix }: { target: number; suffix: string }) {
     if (!started) return;
     let frame = 0;
     const duration = 1500;
-    const fps = 60;
-    const totalFrames = (duration / 1000) * fps;
-    const increment = target / totalFrames;
+    const startTime = performance.now();
 
-    let current = 0;
-    const tick = () => {
-      current += increment;
-      if (current < target) {
-        setCount(Math.ceil(current));
+    const tick = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out quad: 1 - (1 - progress) * (1 - progress)
+      const easeOut = 1 - (1 - progress) * (1 - progress);
+      setCount(Math.round(easeOut * target));
+
+      if (progress < 1) {
         frame = requestAnimationFrame(tick);
-      } else {
-        setCount(target);
       }
     };
+
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
   }, [started, target]);

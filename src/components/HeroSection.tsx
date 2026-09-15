@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import type { Swiper as SwiperType } from 'swiper';
 
 const heroSlides = [
   { src: '/hero/hero-1.jpg', alt: 'RIAKA Landmark Residence' },
@@ -13,7 +14,7 @@ const heroSlides = [
 ];
 
 export default function HeroSection() {
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   useEffect(() => {
     // Dynamically import Swiper to avoid SSR issues
@@ -61,7 +62,11 @@ export default function HeroSection() {
       }
     };
     document.addEventListener('visibilitychange', onVisibility);
-    return () => document.removeEventListener('visibilitychange', onVisibility);
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibility);
+      swiperRef.current?.destroy(true, true);
+      swiperRef.current = null;
+    };
   }, []);
 
   return (
@@ -80,7 +85,7 @@ export default function HeroSection() {
                 fill
                 className="hero-img"
                 style={{ objectFit: 'cover', objectPosition: 'center' }}
-                priority={i === 0}
+                priority={i <= 1}
                 sizes="100vw"
               />
               <div className="absolute inset-0 hero-overlay pointer-events-none" />
@@ -112,7 +117,7 @@ export default function HeroSection() {
           <div className="flex flex-wrap items-center gap-3.5">
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2.5 bg-white text-blue font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3 sm:py-3.5 rounded-full hover:bg-skyblue hover:text-navy transition-all duration-200 shadow-xl hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2.5 bg-navy text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3 sm:py-3.5 rounded-full hover:bg-white hover:text-navy transition-all duration-200 shadow-xl hover:-translate-y-0.5"
             >
               <span>Start Your Project</span>
               <svg
