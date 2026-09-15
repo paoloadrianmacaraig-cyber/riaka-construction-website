@@ -7,7 +7,7 @@ export default function AboutSection() {
         <p className="text-skyblue font-extrabold text-xs sm:text-sm uppercase tracking-[1.4px] mb-3">
           Get to Know Us
         </p>
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-14 items-start">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-14 items-start reveal-up">
           <div className="flex-1">
             <h2 className="font-extrabold text-white text-3xl sm:text-4xl lg:text-[42px] leading-[1.2] tracking-tight mb-5">
               Full-Service Construction, Design &amp; Development
@@ -23,7 +23,7 @@ export default function AboutSection() {
             >
               <span>Learn more</span>
               <svg
-                className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                className="w-4 h-4 flex-shrink-0"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={2.5}

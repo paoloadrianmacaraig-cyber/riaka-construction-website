@@ -9,7 +9,7 @@ export default function WhyChooseSection() {
         </h2>
 
         {/* 4-column collage */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3.5 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3.5 mb-8 reveal-up">
           {/* Col 1: Tall ribbon-cutting */}
           <div className="lg:col-span-3 rounded-none overflow-hidden h-80 sm:h-96 lg:h-[580px] shadow-lg bg-[#1a2c4e] relative">
             <Image

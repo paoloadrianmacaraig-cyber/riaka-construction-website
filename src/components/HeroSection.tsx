@@ -121,7 +121,7 @@ export default function HeroSection() {
             >
               <span>Start Your Project</span>
               <svg
-                className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                className="w-4 h-4 flex-shrink-0"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={2.5}
@@ -151,7 +151,7 @@ export default function HeroSection() {
           className="group w-[60px] h-[60px] sm:w-[70px] sm:h-[70px] rounded-full bg-black/40 hover:bg-black/60 active:scale-95 border border-white/20 text-white flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-sm"
         >
           <svg
-            className="w-6 h-6 transition-transform duration-200 group-hover:-translate-x-0.5"
+            className="w-6 h-6 flex-shrink-0"
             fill="none"
             stroke="currentColor"
             strokeWidth={2.5}
@@ -169,7 +169,7 @@ export default function HeroSection() {
           className="group w-[60px] h-[60px] sm:w-[70px] sm:h-[70px] rounded-full bg-black/40 hover:bg-black/60 active:scale-95 border border-white/20 text-white flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-sm"
         >
           <svg
-            className="w-6 h-6 transition-transform duration-200 group-hover:translate-x-0.5"
+            className="w-6 h-6 flex-shrink-0"
             fill="none"
             stroke="currentColor"
             strokeWidth={2.5}

@@ -3,7 +3,7 @@ export default function MissionVisionSection() {
     <section className="py-20 lg:py-28 px-6 lg:px-16 bg-white">
       <div className="max-w-screen-xl mx-auto">
         {/* 3-column: Headline | Mission | Vision */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch reveal-up">
           {/* Left: Bold Headline */}
           <div className="lg:col-span-5 xl:col-span-4 flex flex-col justify-center">
             <h2 className="font-extrabold text-navy text-3xl sm:text-4xl lg:text-[42px] xl:text-[48px] leading-[1.32] tracking-tight space-y-2.5">

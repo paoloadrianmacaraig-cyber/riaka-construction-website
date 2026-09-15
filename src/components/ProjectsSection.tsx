@@ -11,7 +11,7 @@ const projects = [
 
 const ArrowRight = () => (
   <svg
-    className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+    className="w-4 h-4 flex-shrink-0"
     fill="none"
     stroke="currentColor"
     strokeWidth={2.5}
@@ -45,7 +45,7 @@ export default function ProjectsSection() {
             <span>Inquire about custom projects</span>
             <span className="w-7 h-7 rounded-full bg-[#5c5b5b]/10 group-hover:bg-gray-900 group-hover:text-white flex items-center justify-center transition-all duration-200">
               <svg
-                className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                className="w-3.5 h-3.5 flex-shrink-0"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={2.5}
@@ -60,7 +60,7 @@ export default function ProjectsSection() {
         </div>
 
         {/* Black container with background photo */}
-        <div className="relative rounded-[25px] overflow-hidden bg-black p-5 sm:p-7 lg:p-10 shadow-2xl">
+        <div className="relative rounded-[25px] overflow-hidden bg-black p-5 sm:p-7 lg:p-10 shadow-2xl reveal-up">
           {/* Background photo + gradient */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <Image

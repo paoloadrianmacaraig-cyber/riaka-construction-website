@@ -23,7 +23,7 @@ const services = [
 
 const ArrowRight = () => (
   <svg
-    className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+    className="w-3.5 h-3.5 flex-shrink-0"
     fill="none"
     stroke="currentColor"
     strokeWidth={2.5}
@@ -46,7 +46,7 @@ export default function ServicesSection() {
           See what we have to offer and what makes our work a step above the rest.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 reveal-up">
           {services.map((svc) => (
             <div
               key={svc.title}
@@ -79,7 +79,7 @@ export default function ServicesSection() {
           >
             <span>Inquire About Our Services</span>
             <svg
-              className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+              className="w-4 h-4 flex-shrink-0"
               fill="none"
               stroke="currentColor"
               strokeWidth={2.5}

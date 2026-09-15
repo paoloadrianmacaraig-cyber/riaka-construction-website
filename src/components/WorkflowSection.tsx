@@ -120,7 +120,7 @@ export default function WorkflowSection() {
         </h2>
         <div className="flex flex-col gap-8">
           {pairs.map((pair, pi) => (
-            <div key={pi} className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+            <div key={pi} className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 reveal-up">
               {pair.map((step) => (
                 <StepCard key={step.num} step={step} />
               ))}

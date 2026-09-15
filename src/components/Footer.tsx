@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const FacebookIcon = () => (
   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -27,11 +28,11 @@ const MapPinIcon = () => (
 );
 
 const quickLinks = [
-  { href: '#about', label: 'About RIAKA' },
-  { href: '#services', label: 'Our Services' },
-  { href: '#projects', label: 'Featured Projects' },
-  { href: '#process', label: 'Our Workflow' },
-  { href: '#contact', label: 'Get in Touch' },
+  { href: '/#about', label: 'About RIAKA' },
+  { href: '/#services', label: 'Our Services' },
+  { href: '/#projects', label: 'Featured Projects' },
+  { href: '/#process', label: 'Our Workflow' },
+  { href: '/#contact', label: 'Get in Touch' },
 ];
 
 export default function Footer() {
@@ -42,7 +43,7 @@ export default function Footer() {
 
           {/* Col 1: Brand */}
           <div className="flex flex-col items-start">
-            <a href="#" className="inline-block mb-4">
+            <Link href="/" className="inline-block mb-4">
               <Image
                 src="/branding/riaka-logo.png"
                 alt="RIAKA Logo"
@@ -50,7 +51,7 @@ export default function Footer() {
                 height={80}
                 className="h-16 w-auto object-contain"
               />
-            </a>
+            </Link>
             <p className="text-[#5c5b5b] text-sm leading-relaxed mb-4">
               Focused mainly on building safe, durable and high-quality homes; general construction
               of multi-storey buildings; and complete architectural solutions.
@@ -115,12 +116,12 @@ export default function Footer() {
             <ul className="text-[#5c5b5b] text-sm space-y-3.5">
               {quickLinks.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="footer-link hover:text-gray-900 transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -131,9 +132,9 @@ export default function Footer() {
         <div className="border-t border-gray-200 pt-8 mt-12 flex flex-col sm:flex-row items-center justify-between text-xs text-[#5c5b5b] gap-4">
           <p>&copy; Riaka Construction and Development Corporation. All Rights Reserved 2026.</p>
           <div className="flex items-center gap-6">
-            <a href="#" className="footer-link hover:text-gray-900 transition-colors">Privacy Policy</a>
+            <Link href="/privacy-policy" className="footer-link hover:text-gray-900 transition-colors">Privacy Policy</Link>
             <span>&bull;</span>
-            <a href="#" className="footer-link hover:text-gray-900 transition-colors">Terms &amp; Conditions</a>
+            <Link href="/terms-and-conditions" className="footer-link hover:text-gray-900 transition-colors">Terms &amp; Conditions</Link>
           </div>
         </div>
       </div>

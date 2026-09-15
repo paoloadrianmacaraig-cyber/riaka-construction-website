@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const CheckIcon = () => (
   <span className="w-5 h-5 rounded-full bg-skyblue/15 border border-skyblue/30 text-skyblue flex items-center justify-center flex-shrink-0">
@@ -11,21 +12,21 @@ const CheckIcon = () => (
 export default function CTASection() {
   return (
     <section className="relative py-20 lg:py-28 px-6 lg:px-16 text-white overflow-hidden">
-      {/* Background photo with navy overlay */}
+      {/* Background photo with darker navy overlay */}
       <div className="absolute inset-0">
         <Image
           src="/cta/cta-bg.jpg"
           alt="RIAKA Hard Hats & Project Site"
           fill
-          className="object-cover"
+          className="object-cover brightness-[0.72]"
           style={{ objectPosition: 'center 55%' }}
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[#0b1424]/65 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0b1424]/85 via-[#162744]/70 to-[#0b1424]/78" />
+        <div className="absolute inset-0 bg-[#070e1a]/78 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#070e1a]/92 via-[#0f1d33]/82 to-[#070e1a]/88" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
+      <div className="relative z-10 max-w-4xl mx-auto text-center reveal-up">
         <p className="text-skyblue font-extrabold text-xs sm:text-sm uppercase tracking-[2.5px] mb-3 drop-shadow-sm">
           Build With Confidence
         </p>
@@ -38,13 +39,13 @@ export default function CTASection() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="#contact"
+          <Link
+            href="/#contact"
             className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white text-navy hover:bg-gray-100 hover:text-navy font-extrabold text-sm sm:text-base px-8 py-4 rounded-full shadow-2xl transition-all duration-200 hover:-translate-y-0.5"
           >
             <span>Request a Project Quotation</span>
             <svg
-              className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+              className="w-4 h-4 flex-shrink-0"
               fill="none"
               stroke="currentColor"
               strokeWidth={2.5}
@@ -54,7 +55,7 @@ export default function CTASection() {
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </a>
+          </Link>
           <a
             href="tel:+639184080396"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-sm sm:text-base px-7 py-4 rounded-full backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5"
