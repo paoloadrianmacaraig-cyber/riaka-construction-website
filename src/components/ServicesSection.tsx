@@ -1,21 +1,27 @@
+import Link from 'next/link';
+
 const services = [
   {
     title: 'Design & Planning',
+    href: '/services#design-planning',
     description:
       'Comprehensive architectural, interior, and visualization services that transform your initial ideas into detailed, build-ready blueprints.',
   },
   {
-    title: 'Construction & Building',
+    title: 'Construction & Structural',
+    href: '/services#construction-building',
     description:
       'End-to-end structural construction and renovation solutions tailored for durable, high-quality residential and commercial properties.',
   },
   {
     title: 'Specialized Works & Finishes',
+    href: '/services#specialized-works',
     description:
       'Skilled trade, fabrication, and custom finishing solutions that deliver the essential technical details and final aesthetic touches.',
   },
   {
-    title: 'Permits & Financing Assistance',
+    title: 'Permits & Assistance',
+    href: '/services#permits-financing',
     description:
       'Hands-on support to handle your building permits, paperwork, and bank loan applications without the hassle.',
   },
@@ -60,13 +66,13 @@ export default function ServicesSection() {
                   {svc.description}
                 </p>
               </div>
-              <a
-                href="#contact"
+              <Link
+                href={svc.href}
                 className="group text-skyblue font-medium text-xs uppercase tracking-[1.4px] hover:underline inline-flex items-center gap-1.5"
               >
                 <span>View details</span>
                 <ArrowRight />
-              </a>
+              </Link>
             </div>
           ))}
         </div>

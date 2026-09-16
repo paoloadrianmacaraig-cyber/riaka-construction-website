@@ -213,3 +213,38 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ==============================================================================
+   SECTION ANCHOR SCROLL MARGINS
+   Ensures section headers are fully visible below the fixed navbar
+   ============================================================================== */
+#design-planning,
+#construction-building,
+#construction-structural,
+#specialized-works,
+#permits-financing,
+#permits-assistance {
+  scroll-margin-top: 144px;
+}
+
+@media (max-width: 1023px) {
+  #design-planning,
+  #construction-building,
+  #construction-structural,
+  #specialized-works,
+  #permits-financing,
+  #permits-assistance {
+    scroll-margin-top: 128px;
+  }
+}
+
+@media (max-width: 639px) {
+  #design-planning,
+  #construction-building,
+  #construction-structural,
+  #specialized-works,
+  #permits-financing,
+  #permits-assistance {
+    scroll-margin-top: 112px;
+  }
+}

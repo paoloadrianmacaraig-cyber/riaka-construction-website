@@ -4,8 +4,28 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+const serviceCategories = [
+  {
+    title: 'Design and Planning',
+    href: '/services#design-planning',
+  },
+  {
+    title: 'Construction & Structural',
+    href: '/services#construction-building',
+  },
+  {
+    title: 'Specialized Works & Finishes',
+    href: '/services#specialized-works',
+  },
+  {
+    title: 'Permits & Assistance',
+    href: '/services#permits-financing',
+  },
+];
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [isPastHero, setIsPastHero] = useState(false);
 
   useEffect(() => {
@@ -44,7 +64,27 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  const closeMobileMenu = () => setMenuOpen(false);
+  const closeMobileMenu = () => {
+    setMenuOpen(false);
+    setMobileServicesOpen(false);
+  };
+
+  const handleCategoryClick = (href: string) => {
+    const [path, hash] = href.split('#');
+    if (typeof window !== 'undefined') {
+      const currentPath = window.location.pathname;
+      if (currentPath === path || (path === '' && currentPath === '/services')) {
+        if (hash === 'design-planning' || !hash) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const el = document.getElementById(hash);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -66,16 +106,69 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <ul className="hidden lg:flex items-center gap-8 xl:gap-10">
-            {['About', 'Services', 'Projects', 'Process'].map((item) => (
-              <li key={item}>
-                <Link
-                  href={`/#${item.toLowerCase()}`}
-                  className="nav-link font-bold text-navy text-[15px] tracking-wide"
+            <li>
+              <Link
+                href="/#about"
+                className="nav-link font-bold text-navy text-[15px] tracking-wide"
+              >
+                About
+              </Link>
+            </li>
+
+            {/* Services with Hover Dropdown (Clean Divided List Style) */}
+            <li className="relative group py-2 flex items-center">
+              <Link
+                href="/#services"
+                className="flex items-center gap-1.5 font-bold text-navy text-[15px] tracking-wide cursor-pointer"
+              >
+                <span className="nav-link">Services</span>
+                <svg
+                  className="w-3.5 h-3.5 text-navy transition-transform duration-200 group-hover:rotate-180 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.4}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  viewBox="0 0 24 24"
                 >
-                  {item}
-                </Link>
-              </li>
-            ))}
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </Link>
+
+              {/* Clean Divided Dropdown Menu */}
+              <div className="absolute top-full left-0 pt-2 min-w-[280px] w-max max-w-[320px] opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 ease-out z-50">
+                <div className="bg-white rounded-lg shadow-xl border border-gray-200 divide-y divide-gray-200 overflow-hidden">
+                  {serviceCategories.map((cat) => (
+                    <Link
+                      key={cat.title}
+                      href={cat.href}
+                      className="block px-5 py-3.5 text-[14px] font-semibold text-gray-800 hover:text-navy hover:bg-gray-50 transition-colors leading-snug"
+                      onClick={() => handleCategoryClick(cat.href)}
+                    >
+                      {cat.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <Link
+                href="/#projects"
+                className="nav-link font-bold text-navy text-[15px] tracking-wide"
+              >
+                Projects
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                href="/#process"
+                className="nav-link font-bold text-navy text-[15px] tracking-wide"
+              >
+                Process
+              </Link>
+            </li>
           </ul>
 
           <Link
@@ -137,40 +230,124 @@ export default function Navbar() {
         }`}
       >
         <ul className="flex flex-col px-7 py-5 gap-1.5">
-          {['About', 'Services', 'Projects', 'Process'].map((item, index) => (
-            <li
-              key={item}
-              style={{
-                transitionDelay: menuOpen ? `${index * 40 + 40}ms` : '0ms',
-              }}
-              className={`transform transition-all duration-300 ease-out ${
-                menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
-              }`}
+          {/* About */}
+          <li
+            style={{ transitionDelay: menuOpen ? '40ms' : '0ms' }}
+            className={`transform transition-all duration-300 ease-out ${
+              menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+            }`}
+          >
+            <Link
+              href="/#about"
+              className="group flex items-center justify-between py-2.5 px-3.5 rounded-xl font-bold text-navy text-[16px] tracking-wide hover:bg-navy/5 hover:text-blue hover:translate-x-1 active:scale-[0.99] transition-all duration-200"
+              onClick={closeMobileMenu}
             >
+              <span className="nav-link">About</span>
+              <svg className="w-4 h-4 text-navy/30 group-hover:text-blue transition-colors duration-200 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </Link>
+          </li>
+
+          {/* Services with Expandable Subcategories on Mobile */}
+          <li
+            style={{ transitionDelay: menuOpen ? '80ms' : '0ms' }}
+            className={`transform transition-all duration-300 ease-out ${
+              menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+            }`}
+          >
+            <div className="flex items-center justify-between py-2.5 px-3.5 rounded-xl font-bold text-navy text-[16px] tracking-wide hover:bg-navy/5">
               <Link
-                href={`/#${item.toLowerCase()}`}
-                className="group flex items-center justify-between py-2.5 px-3.5 rounded-xl font-bold text-navy text-[16px] tracking-wide hover:bg-navy/5 hover:text-blue hover:translate-x-1 active:scale-[0.99] transition-all duration-200"
+                href="/#services"
+                className="flex-1 nav-link"
                 onClick={closeMobileMenu}
               >
-                <span className="nav-link">{item}</span>
+                Services
+              </Link>
+              <button
+                type="button"
+                aria-label="Toggle services submenu"
+                onClick={() => setMobileServicesOpen((o) => !o)}
+                className="p-1 rounded-lg hover:bg-navy/10 text-navy/60 transition-colors"
+              >
                 <svg
-                  className="w-4 h-4 text-navy/30 group-hover:text-blue transition-colors duration-200 flex-shrink-0"
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    mobileServicesOpen ? 'rotate-180' : ''
+                  }`}
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth={2}
+                  strokeWidth={2.2}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   viewBox="0 0 24 24"
                 >
-                  <path d="m9 18 6-6-6-6" />
+                  <path d="m6 9 6 6 6-6" />
                 </svg>
-              </Link>
-            </li>
-          ))}
+              </button>
+            </div>
+
+            {/* Mobile Submenu Accordion */}
+            {mobileServicesOpen && (
+              <ul className="bg-white border border-gray-200 rounded-lg divide-y divide-gray-200 mt-2 mb-1 overflow-hidden shadow-sm">
+                {serviceCategories.map((cat) => (
+                  <li key={cat.title}>
+                    <Link
+                      href={cat.href}
+                      className="block px-4 py-3 text-[13px] font-semibold text-gray-800 hover:text-navy hover:bg-gray-50 transition-colors"
+                      onClick={() => {
+                        closeMobileMenu();
+                        handleCategoryClick(cat.href);
+                      }}
+                    >
+                      {cat.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+
+          {/* Projects */}
           <li
-            style={{
-              transitionDelay: menuOpen ? '200ms' : '0ms',
-            }}
+            style={{ transitionDelay: menuOpen ? '120ms' : '0ms' }}
+            className={`transform transition-all duration-300 ease-out ${
+              menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+            }`}
+          >
+            <Link
+              href="/#projects"
+              className="group flex items-center justify-between py-2.5 px-3.5 rounded-xl font-bold text-navy text-[16px] tracking-wide hover:bg-navy/5 hover:text-blue hover:translate-x-1 active:scale-[0.99] transition-all duration-200"
+              onClick={closeMobileMenu}
+            >
+              <span className="nav-link">Projects</span>
+              <svg className="w-4 h-4 text-navy/30 group-hover:text-blue transition-colors duration-200 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </Link>
+          </li>
+
+          {/* Process */}
+          <li
+            style={{ transitionDelay: menuOpen ? '160ms' : '0ms' }}
+            className={`transform transition-all duration-300 ease-out ${
+              menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+            }`}
+          >
+            <Link
+              href="/#process"
+              className="group flex items-center justify-between py-2.5 px-3.5 rounded-xl font-bold text-navy text-[16px] tracking-wide hover:bg-navy/5 hover:text-blue hover:translate-x-1 active:scale-[0.99] transition-all duration-200"
+              onClick={closeMobileMenu}
+            >
+              <span className="nav-link">Process</span>
+              <svg className="w-4 h-4 text-navy/30 group-hover:text-blue transition-colors duration-200 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </Link>
+          </li>
+
+          {/* CTA */}
+          <li
+            style={{ transitionDelay: menuOpen ? '200ms' : '0ms' }}
             className={`pt-2.5 transform transition-all duration-300 ease-out ${
               menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
             }`}
@@ -181,15 +358,7 @@ export default function Navbar() {
               onClick={closeMobileMenu}
             >
               <span>Get in Touch</span>
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </Link>

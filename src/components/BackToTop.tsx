@@ -7,7 +7,7 @@ export default function BackToTop() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setVisible(window.scrollY > 400);
+      setVisible(window.scrollY > 280);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -28,17 +28,18 @@ export default function BackToTop() {
       type="button"
       onClick={scrollToTop}
       aria-label="Back to top"
-      className={`fixed bottom-5 right-5 z-40 group w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-navy text-white shadow-lg hover:shadow-xl hover:bg-[#1a2b47] hover:scale-105 active:scale-95 border border-white/20 transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-skyblue/50 ${
+      title="Back to top"
+      className={`fixed bottom-5 right-5 z-50 group flex items-center justify-center w-9 h-9 rounded-full bg-navy text-white shadow-md hover:shadow-lg hover:bg-[#1a2b47] hover:-translate-y-0.5 active:scale-90 border border-white/20 transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-skyblue/50 cursor-pointer ${
         visible
           ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
           : 'opacity-0 translate-y-4 scale-90 pointer-events-none'
       }`}
     >
       <svg
-        className="w-4 h-4 flex-shrink-0"
+        className="w-4 h-4 flex-shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5"
         fill="none"
         stroke="currentColor"
-        strokeWidth={2.5}
+        strokeWidth={2.2}
         strokeLinecap="round"
         strokeLinejoin="round"
         viewBox="0 0 24 24"
