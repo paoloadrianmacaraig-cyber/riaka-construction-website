@@ -29,25 +29,12 @@ export default function Navbar() {
   const [isPastHero, setIsPastHero] = useState(false);
 
   useEffect(() => {
-    const heroSection = document.getElementById('hero');
-    if (!heroSection) {
-      const handleScroll = () => {
-        setIsPastHero(window.scrollY > 20);
-      };
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      handleScroll();
-      return () => window.removeEventListener('scroll', handleScroll);
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsPastHero(!entry.isIntersecting);
-      },
-      { rootMargin: '-76px 0px 0px 0px', threshold: 0 }
-    );
-
-    observer.observe(heroSection);
-    return () => observer.disconnect();
+    const handleScroll = () => {
+      setIsPastHero(window.scrollY > 15);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -90,7 +77,9 @@ export default function Navbar() {
     <>
       <nav
         id="navbar"
-        className={`flex items-center px-6 lg:px-16${isPastHero ? ' is-past-hero' : ''}`}
+        className={`flex items-center px-6 lg:px-16 backdrop-blur-md lg:backdrop-blur-lg ${
+          isPastHero ? 'is-past-hero' : ''
+        }`}
       >
         <div className="max-w-screen-xl mx-auto w-full flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">

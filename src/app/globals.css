@@ -44,13 +44,17 @@ body {
   right: 0;
   z-index: 50;
   height: 68px;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transform: translate3d(0, 0, 0);
+  isolation: isolate;
   transition:
     background-color 0.35s ease,
-    backdrop-filter 0.35s ease,
     -webkit-backdrop-filter 0.35s ease,
+    backdrop-filter 0.35s ease,
     box-shadow 0.35s ease,
     border-color 0.35s ease;
 }
@@ -62,10 +66,10 @@ body {
 }
 
 #navbar.is-past-hero {
-  background-color: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom-color: rgba(229, 231, 235, 0.6);
+  background-color: rgba(255, 255, 255, 0.80);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom-color: rgba(229, 231, 235, 0.7);
   box-shadow: 0 6px 24px -4px rgba(0, 0, 0, 0.09);
 }
 
