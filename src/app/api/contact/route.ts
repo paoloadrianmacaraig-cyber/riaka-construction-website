@@ -93,15 +93,26 @@ export async function POST(request: Request) {
 
     if (smtpUser && smtpPass) {
       try {
-        const transporter = nodemailer.createTransport({
-          host: smtpHost,
-          port: smtpPort,
-          secure: smtpPort === 465,
-          auth: {
-            user: smtpUser,
-            pass: smtpPass,
-          },
-        });
+        const isGmail = smtpHost.includes('gmail') || smtpPort === 465;
+        const transporter = nodemailer.createTransport(
+          isGmail
+            ? {
+                service: 'gmail',
+                auth: {
+                  user: smtpUser,
+                  pass: smtpPass,
+                },
+              }
+            : {
+                host: smtpHost,
+                port: smtpPort,
+                secure: smtpPort === 465,
+                auth: {
+                  user: smtpUser,
+                  pass: smtpPass,
+                },
+              }
+        );
 
         const safeFullName = escapeHtml(`${first_name} ${last_name}`);
         const safeEmail = escapeHtml(email);
@@ -234,11 +245,14 @@ export async function POST(request: Request) {
     }
 
     // 3. Fallback if neither SMTP nor XAMPP is available
-    console.log('[RIAKA Contact Form Fallback]:', payload);
-    return NextResponse.json({
-      success: true,
-      message: 'Thank you! Your inquiry has been received. Our team will review your project details and get back to you promptly to schedule a consultation.',
-    });
+    console.error('[RIAKA Contact Form]: Neither SMTP environment variables nor local XAMPP found.');
+    return NextResponse.json(
+      {
+        success: false,
+        message: 'Email service is not yet configured. Please configure SMTP_USER and SMTP_PASS in Vercel Environment Variables and redeploy.',
+      },
+      { status: 503 }
+    );
   } catch (error) {
     console.error('Error handling contact form:', error);
     return NextResponse.json(
