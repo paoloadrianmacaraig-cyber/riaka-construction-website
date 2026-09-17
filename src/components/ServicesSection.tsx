@@ -79,9 +79,9 @@ export default function ServicesSection() {
 
         {/* Inquire Button */}
         <div className="mt-10 text-center">
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-3 bg-navy hover:bg-[#1a2b47] text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 border border-white/20"
+          <Link
+            href="/contact"
+            className="group inline-flex items-center gap-3 bg-navy/90 hover:bg-navy text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 border border-white/20"
           >
             <span>Inquire About Our Services</span>
             <svg
@@ -95,7 +95,7 @@ export default function ServicesSection() {
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

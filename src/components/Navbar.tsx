@@ -208,10 +208,10 @@ export default function Navbar() {
           </ul>
 
           <Link
-            href="/#contact"
-            className="hidden lg:flex items-center justify-center bg-navy text-white font-bold text-sm tracking-wide rounded-full px-6 py-2.5 hover:opacity-80 transition-all duration-200 shadow-sm hover:shadow"
+            href="/contact"
+            className="hidden lg:flex items-center justify-center bg-navy/90 text-white font-bold text-sm tracking-wide rounded-full px-6 py-2.5 hover:bg-navy hover:shadow transition-all duration-200 shadow-sm"
           >
-            Get in Touch
+            Get a Quote
           </Link>
 
           {/* Hamburger */}
@@ -381,11 +381,11 @@ export default function Navbar() {
             }`}
           >
             <Link
-              href="/#contact"
-              className="flex items-center justify-center font-bold text-white bg-navy rounded-full py-3.5 px-6 text-sm tracking-wide shadow-md hover:opacity-90 active:scale-[0.98] transition-all duration-200"
+              href="/contact"
+              className="flex items-center justify-center font-bold text-white bg-navy/90 rounded-full py-3.5 px-6 text-sm tracking-wide shadow-md hover:bg-navy active:scale-[0.98] transition-all duration-200"
               onClick={closeMobileMenu}
             >
-              <span>Get in Touch</span>
+              <span>Get a Quote</span>
             </Link>
           </li>
         </ul>

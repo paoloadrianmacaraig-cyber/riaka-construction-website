@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const projects = [
   { src: '/projects/project-1.png', alt: 'Project 1' },
@@ -38,8 +39,8 @@ export default function ProjectsSection() {
               well-built and thoughtfully designed space.
             </p>
           </div>
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             className="group inline-flex items-center gap-2.5 text-[#5c5b5b] font-extrabold text-xs sm:text-sm uppercase tracking-[1.4px] hover:text-gray-900 transition-colors duration-200 self-start md:self-auto"
           >
             <span>Inquire about custom projects</span>
@@ -56,7 +57,7 @@ export default function ProjectsSection() {
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </span>
-          </a>
+          </Link>
         </div>
 
         {/* Black container with background photo */}
@@ -103,13 +104,13 @@ export default function ProjectsSection() {
 
         {/* Button outside the box */}
         <div className="mt-10 text-center">
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-2.5 bg-navy text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3 sm:py-3.5 rounded-full hover:opacity-90 transition-all duration-200 shadow-xl hover:-translate-y-0.5"
+          <Link
+            href="/contact"
+            className="group inline-flex items-center gap-2.5 bg-navy/90 hover:bg-navy text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3 sm:py-3.5 rounded-full transition-all duration-200 shadow-xl hover:-translate-y-0.5"
           >
             <span>See More Completed Projects</span>
             <ArrowRight />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

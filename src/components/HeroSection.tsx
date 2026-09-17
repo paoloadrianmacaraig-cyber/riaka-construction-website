@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import type { Swiper as SwiperType } from 'swiper';
 
 const heroSlides = [
@@ -116,9 +117,9 @@ export default function HeroSection() {
             <span className="text-white">multi-storey developments</span>.
           </p>
           <div className="flex flex-wrap items-center gap-3.5">
-            <a
-              href="#contact"
-              className="group inline-flex items-center gap-2.5 bg-navy text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3 sm:py-3.5 rounded-full hover:bg-white hover:text-navy transition-all duration-200 shadow-xl hover:-translate-y-0.5"
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2.5 bg-navy/90 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3 sm:py-3.5 rounded-full hover:bg-white hover:text-navy transition-all duration-200 shadow-xl hover:-translate-y-0.5"
             >
               <span>Start Your Project</span>
               <svg
@@ -132,7 +133,7 @@ export default function HeroSection() {
               >
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
-            </a>
+            </Link>
             <a
               href="#projects"
               className="inline-flex items-center gap-2 border border-white text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3 sm:py-3.5 rounded-full hover:bg-white/10 transition-all duration-200"

@@ -32,12 +32,12 @@ const quickLinks = [
   { href: '/#services', label: 'Our Services' },
   { href: '/#projects', label: 'Featured Projects' },
   { href: '/#process', label: 'Our Workflow' },
-  { href: '/#contact', label: 'Get in Touch' },
+  { href: '/contact', label: 'Get a Quote' },
 ];
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-white py-16 lg:py-20 px-6 lg:px-16 border-t border-gray-200">
+    <footer className="bg-white py-16 lg:py-20 px-6 lg:px-16 border-t border-gray-200">
       <div className="max-w-screen-xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16 mb-12 items-start">
 
@@ -94,16 +94,28 @@ export default function Footer() {
                 <span className="leading-relaxed pt-1">M.H. Del Pilar St., Lemery, Philippines, 4209</span>
               </li>
             </ul>
-            <div className="mt-6">
+            <div className="mt-6 flex flex-wrap gap-2.5">
               <a
                 href="https://www.facebook.com/RIAKAconstruction"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit RIAKA Construction Facebook Page"
-                className="inline-flex items-center gap-2.5 bg-navy hover:opacity-90 text-white px-5 py-2.5 rounded-full font-bold text-xs shadow-sm hover:shadow transition-all duration-200 hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 bg-navy/85 hover:bg-navy text-white px-4 py-2.5 rounded-full font-bold text-xs shadow-sm hover:shadow transition-all duration-200 hover:-translate-y-0.5"
               >
                 <FacebookIcon />
-                <span>Follow us on Facebook</span>
+                <span>Facebook Page</span>
+              </a>
+              <a
+                href="https://m.me/RIAKAconstruction"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Chat with RIAKA Construction on Facebook Messenger"
+                className="inline-flex items-center gap-2 bg-[#0084FF]/85 hover:bg-[#0084FF] text-white px-4 py-2.5 rounded-full font-bold text-xs shadow-sm hover:shadow transition-all duration-200 hover:-translate-y-0.5"
+              >
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2C6.477 2 2 6.145 2 11.258c0 2.91 1.455 5.512 3.735 7.205V22l3.39-1.86c.92.255 1.89.39 2.875.39 5.523 0 10-4.145 10-9.258C22 6.145 17.523 2 12 2zm1.06 12.443-2.715-2.895-5.3 2.895 5.828-6.19 2.784 2.895 5.231-2.895-5.828 6.19z" />
+                </svg>
+                <span>Chat on Messenger</span>
               </a>
             </div>
           </div>

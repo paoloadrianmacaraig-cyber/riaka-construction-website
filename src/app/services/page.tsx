@@ -18,9 +18,9 @@ interface PlaceholderProps {
   recommendedSize?: string;
 }
 
-function ImagePlaceholder({ label, recommendedSize = '1200 × 900px' }: PlaceholderProps) {
+function ImagePlaceholder({ label, recommendedSize = '1200 × 1500px' }: PlaceholderProps) {
   return (
-    <div className="relative w-full h-full min-h-[340px] sm:min-h-[420px] lg:min-h-[460px] rounded-3xl bg-gradient-to-br from-slate-100 via-slate-200/60 to-slate-100 border-2 border-dashed border-slate-300 flex flex-col items-center justify-center p-8 text-center group hover:border-navy/40 transition-all duration-300 shadow-inner overflow-hidden">
+    <div className="relative w-full aspect-[4/5] rounded-3xl bg-gradient-to-br from-slate-100 via-slate-200/60 to-slate-100 border-2 border-dashed border-slate-300 flex flex-col items-center justify-center p-8 text-center group hover:border-navy/40 transition-all duration-300 shadow-inner overflow-hidden">
       {/* Background blueprint subtle grid pattern */}
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -68,6 +68,7 @@ const serviceCategories = [
     description:
       'Comprehensive architectural, interior, and visualization services that transform your initial ideas into detailed, build-ready blueprints.',
     imageSrc: '/services/design-and-planning.jpg',
+    imageObjectPosition: 'center 20%',
     imageLabel: 'Design & Planning Visual',
     imagePosition: 'left' as const,
     subcategories: [
@@ -95,6 +96,7 @@ const serviceCategories = [
     description:
       'End-to-end structural construction and renovation solutions tailored for durable, high-quality residential and commercial properties.',
     imageSrc: '/services/construction-structural-site-hd.jpg',
+    imageObjectPosition: 'center 40%',
     imageLabel: 'Construction & Structural Visual',
     imagePosition: 'right' as const,
     subcategories: [
@@ -131,6 +133,7 @@ const serviceCategories = [
     description:
       'Skilled trade, fabrication, and custom finishing solutions that deliver the essential technical details and final aesthetic touches.',
     imageSrc: '/services/specialized-works-and-finishes.jpg',
+    imageObjectPosition: 'center 30%',
     imageLabel: 'Specialized Works & Finishes Visual',
     imagePosition: 'left' as const,
     subcategories: [
@@ -178,6 +181,7 @@ const serviceCategories = [
     description:
       'Hands-on support to handle your building permits, paperwork, and bank loan applications without the hassle.',
     imageSrc: '/services/permits-assistance-billboard-hd.jpg',
+    imageObjectPosition: 'center 35%',
     imageLabel: 'Permits & Assistance Visual',
     imagePosition: 'right' as const,
     subcategories: [
@@ -240,18 +244,13 @@ export default function ServicesPage() {
                     }`}
                   >
                     {category.imageSrc ? (
-                      <div
-                        className={`relative w-full ${
-                          category.id === 'construction-building'
-                            ? 'aspect-[4/3] min-h-[260px] sm:min-h-[320px] lg:min-h-[340px]'
-                            : 'min-h-[360px] sm:min-h-[440px] lg:min-h-[500px]'
-                        } rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200/80 group`}
-                      >
+                      <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200/80 group">
                         <Image
                           src={category.imageSrc}
                           alt={category.title}
                           fill
-                          className="object-cover group-hover:scale-[1.02] transition-transform duration-500 object-center"
+                          className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                          style={{ objectPosition: category.imageObjectPosition || 'center' }}
                           sizes="(max-width: 1024px) 100vw, 40vw"
                           priority={index === 0}
                         />
@@ -259,26 +258,31 @@ export default function ServicesPage() {
                     ) : (
                       <ImagePlaceholder
                         label={category.imageLabel}
-                        recommendedSize="1200 × 900px"
+                        recommendedSize="1200 × 1500px"
                       />
                     )}
                   </div>
 
                   {/* Subcategories Column */}
                   <div
-                    className={`lg:col-span-7 flex flex-col space-y-4 sm:space-y-5 ${
+                    className={`lg:col-span-7 flex flex-col divide-y divide-slate-200/90 ${
                       isImageLeft ? 'order-2' : 'order-2 lg:order-1'
                     }`}
                   >
-                    {category.subcategories.map((sub) => (
+                    {category.subcategories.map((sub, subIndex) => (
                       <div
                         key={sub.title}
-                        className="bg-navy rounded-2xl border border-white/10 p-6 sm:p-7 shadow-md hover:shadow-xl transition-all duration-200 hover:border-skyblue/40 hover:-translate-y-0.5"
+                        className="group py-6 sm:py-7 first:pt-0 last:pb-0 transition-all duration-200"
                       >
-                        <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mb-2.5">
-                          {sub.title}
-                        </h3>
-                        <p className="text-sm sm:text-[15px] text-white/85 leading-relaxed font-normal">
+                        <div className="flex items-baseline gap-3.5 mb-2">
+                          <span className="text-xs font-mono font-bold text-blue-600 tracking-wider select-none">
+                            {String(subIndex + 1).padStart(2, '0')}
+                          </span>
+                          <h3 className="text-xl sm:text-2xl font-bold text-navy tracking-tight group-hover:text-blue-600 group-hover:translate-x-1 transition-all duration-200">
+                            {sub.title}
+                          </h3>
+                        </div>
+                        <p className="text-[#5c5b5b] text-sm sm:text-[15px] lg:text-base leading-relaxed pl-7 sm:pl-8 font-normal">
                           {sub.description}
                         </p>
                       </div>
