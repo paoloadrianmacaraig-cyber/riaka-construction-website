@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
 import CTASection from '@/components/CTASection';
 import ScrollReveal from '@/components/ScrollReveal';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: 'Terms & Conditions | RIAKA Construction & Development Corp.',
@@ -173,23 +173,14 @@ export default function TermsAndConditionsPage() {
     <>
       <Navbar />
       <main className="min-h-screen bg-[#f8fafc]">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-br from-navy via-[#1b2f4f] to-[#142338] text-white pt-28 pb-16 md:pt-36 md:pb-20 px-6 lg:px-16">
-          <div className="max-w-4xl mx-auto">
-            {/* Breadcrumb Back Link */}
-            <div className="mb-6">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-xs font-semibold text-skyblue hover:text-white transition-colors"
-              >
-                <span>&larr;</span> Back to Home
-              </Link>
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 uppercase tracking-tight text-white">
+        {/* Page Header / Breadcrumb Hero Banner */}
+        <section className="bg-navy text-white pt-24 lg:pt-28 pb-10 sm:pb-12 px-6 lg:px-16 border-b border-white/10">
+          <div className="max-w-4xl mx-auto pt-4">
+            <Breadcrumb items={[{ label: 'Terms & Conditions' }]} className="mb-5" />
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-3 uppercase tracking-tight text-white">
               Terms &amp; Conditions
             </h1>
-            <p className="text-base sm:text-lg text-gray-300 font-medium">
+            <p className="text-sm sm:text-base text-gray-300 font-medium">
               Effective Date: January 6, 2026
             </p>
           </div>

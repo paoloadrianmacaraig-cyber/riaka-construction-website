@@ -6,6 +6,7 @@ import CTASection from '@/components/CTASection';
 import BackToTop from '@/components/BackToTop';
 import ScrollReveal from '@/components/ScrollReveal';
 import ServiceAnchorScroll from '@/components/ServiceAnchorScroll';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: 'Our Services | RIAKA Construction & Development Corp.',
@@ -101,29 +102,24 @@ const serviceCategories = [
     imagePosition: 'right' as const,
     subcategories: [
       {
-        title: 'General Construction',
+        title: 'General Construction and Renovation',
         description:
-          'We handle the heavy lifting, daily site coordination, and material sourcing to take your project from ground zero to final turnover. You can sit back and watch your project rise knowing our team has every detail covered.',
+          'From laying strong foundation footings to framing, concrete pouring, and final inspections, we build every home and commercial structure to stand strong for generations. We manage daily site operations closely so your construction moves forward smoothly and stays on budget.',
       },
       {
-        title: 'Residential Builds',
+        title: 'Carpentry Works',
         description:
-          'Building a home is personal, so we craft houses tailored to how you and your family actually live. Expect solid foundations, quality materials, and a smooth build process that makes moving day unforgettable.',
+          'Our skilled carpenters craft sturdy framing, precise interior partitions, custom cabinetry, and polished woodwork that elevate the look, comfort, and functionality of your living spaces.',
       },
       {
-        title: 'Commercial Buildings',
+        title: 'Masonry Works',
         description:
-          'Whether it’s a retail shop, office space, or rental unit, we build spaces that help your business thrive and attract foot traffic. We focus on durable, practical builds delivered on time so you can start operating sooner.',
+          'Solid concrete masonry unit (CMU) layouts, smooth plastering, reinforced retaining walls, and precision perimeter boundaries built with reliable structural integrity for complete peace of mind.',
       },
       {
-        title: 'Roofing Services',
+        title: 'Steel Framing and Roofing Works',
         description:
-          'Protect your investment with tough, precision-welded steel trusses and quality roofing made to weather strong storms. We ensure clean, leak-free installation so you stay dry and worry-free year-round.',
-      },
-      {
-        title: 'Renovation',
-        description:
-          'Ready to give your old space a fresh look, extra room, or a total modern upgrade? We breathe new life into existing structures, fixing wear and tear while boosting your property’s curb appeal and value.',
+          'Engineered steel trusses, durable metal rafters, and weather-sealed roofing installations designed to withstand Philippine monsoons and high winds while keeping your property fully protected.',
       },
     ],
   },
@@ -131,12 +127,17 @@ const serviceCategories = [
     id: 'specialized-works',
     title: 'Specialized Works & Finishes',
     description:
-      'Skilled trade, fabrication, and custom finishing solutions that deliver the essential technical details and final aesthetic touches.',
+      'Precision utility installations, fine exterior craftsmanship, and landscape solutions that deliver both functionality and aesthetic distinction.',
     imageSrc: '/services/specialized-works-and-finishes.jpg',
     imageObjectPosition: 'center 30%',
     imageLabel: 'Specialized Works & Finishes Visual',
     imagePosition: 'left' as const,
     subcategories: [
+      {
+        title: 'Tile Works',
+        description:
+          'Expert floor and wall tiling for bathrooms, kitchens, living halls, and outdoor patios. We ensure precise alignment, zero hollow spots, and clean grout lines that last through years of foot traffic.',
+      },
       {
         title: 'Electrical Works',
         description:
@@ -203,46 +204,55 @@ export default function ServicesPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[#f8fafc] pt-28 sm:pt-32 lg:pt-36 pb-16 lg:pb-24 px-6 lg:px-16">
-        <div className="max-w-6xl mx-auto">
-          {serviceCategories.map((category, index) => {
-            const isImageLeft = category.imagePosition === 'left';
+      <main className="min-h-screen bg-[#f8fafc]">
+        {/* Page Header / Breadcrumb Hero Banner */}
+        <section className="bg-navy text-white pt-24 lg:pt-28 pb-10 sm:pb-12 px-6 lg:px-16 border-b border-white/10">
+          <div className="max-w-6xl mx-auto pt-4">
+            <Breadcrumb items={[{ label: 'Services' }]} className="mb-5" />
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight uppercase tracking-[1.4px]">
+              Our Services
+            </h1>
+            <p className="text-gray-300 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
+              Explore our full range of construction, architectural planning, specialized finishes, and government permit processing services.
+            </p>
+          </div>
+        </section>
 
-            return (
-              <div key={category.id}>
-                {/* Title & Gray Description */}
-                <div
-                  id={category.id}
-                  className="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-36 mb-10 lg:mb-14"
-                >
-                  {category.aliasId && (
-                    <div
-                      id={category.aliasId}
-                      className="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-36 -mt-28 sm:-mt-32 lg:-mt-36"
-                    />
-                  )}
-                  {index === 0 ? (
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy tracking-tight mb-3">
-                      {category.title}
-                    </h1>
-                  ) : (
+        {/* Services List Content */}
+        <div className="py-14 lg:py-20 px-6 lg:px-16">
+          <div className="max-w-6xl mx-auto">
+            {serviceCategories.map((category, index) => {
+              const isImageLeft = category.imagePosition === 'left';
+
+              return (
+                <div key={category.id}>
+                  {/* Title & Gray Description */}
+                  <div
+                    id={category.id}
+                    className="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-36 mb-10 lg:mb-14"
+                  >
+                    {category.aliasId && (
+                      <div
+                        id={category.aliasId}
+                        className="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-36 -mt-28 sm:-mt-32 lg:-mt-36"
+                      />
+                    )}
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy tracking-tight mb-3">
                       {category.title}
                     </h2>
-                  )}
-                  <p className="text-[#5c5b5b] text-base sm:text-lg max-w-3xl leading-relaxed">
-                    {category.description}
-                  </p>
-                </div>
+                    <p className="text-[#5c5b5b] text-base sm:text-lg max-w-3xl leading-relaxed">
+                      {category.description}
+                    </p>
+                  </div>
 
-                {/* Alternating Image and Subcategories */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-                  {/* Image Column */}
-                  <div
-                    className={`lg:col-span-5 flex flex-col lg:sticky lg:top-32 self-start ${
-                      isImageLeft ? 'order-1' : 'order-1 lg:order-2'
-                    }`}
-                  >
+                  {/* Alternating Image and Subcategories */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                    {/* Image Column */}
+                    <div
+                      className={`lg:col-span-5 flex flex-col lg:sticky lg:top-32 self-start ${
+                        isImageLeft ? 'order-1' : 'order-1 lg:order-2'
+                      }`}
+                    >
                     {category.imageSrc ? (
                       <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200/80 group">
                         <Image
@@ -297,6 +307,7 @@ export default function ServicesPage() {
               </div>
             );
           })}
+          </div>
         </div>
       </main>
 

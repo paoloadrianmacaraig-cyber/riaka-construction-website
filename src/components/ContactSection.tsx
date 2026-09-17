@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState, memo } from 'react';
 
 // Facebook Messenger icon for direct inquiry chat
 const FacebookMessengerIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
@@ -8,6 +8,120 @@ const FacebookMessengerIcon = ({ className = 'w-5 h-5' }: { className?: string }
     <path d="M12 2C6.477 2 2 6.145 2 11.258c0 2.91 1.455 5.512 3.735 7.205V22l3.39-1.86c.92.255 1.89.39 2.875.39 5.523 0 10-4.145 10-9.258C22 6.145 17.523 2 12 2zm1.06 12.443-2.715-2.895-5.3 2.895 5.828-6.19 2.784 2.895 5.231-2.895-5.828 6.19z" />
   </svg>
 );
+
+// Inline validation error message displayed under input boxes
+const FieldError = ({ message = 'Please fill out this field.' }: { message?: string }) => (
+  <p className="text-red-400 text-xs mt-1.5 flex items-center gap-1.5 font-medium">
+    <svg className="w-3.5 h-3.5 flex-shrink-0 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+      <path fillRule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1-9a1 1 0 0 0-1 1v4a1 1 0 1 0 2 0V6a1 1 0 0 0-1-1Z" clipRule="evenodd" />
+    </svg>
+    <span>{message}</span>
+  </p>
+);
+
+// Static Left Column - Memoized so typing into contact inputs doesn't re-render iframe or map
+const ContactInfoSection = memo(function ContactInfoSection() {
+  return (
+    <div className="lg:col-span-6 flex flex-col h-full justify-between">
+      <div>
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15] mb-5">
+          Let&apos;s Build Something{' '}
+          <span className="text-skyblue">
+            Exceptional.
+          </span>
+        </h1>
+        <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-8">
+          Got a project in mind? Connect with us to schedule a meeting, discuss design consultations, or explore your construction needs in Batangas and beyond.
+        </p>
+
+        {/* Quick Contact Links */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <a
+            href="tel:+639184080396"
+            className="flex items-center gap-3.5 p-3.5 rounded-xl hover:bg-white/[0.06] transition-all group"
+          >
+            <svg className="w-5 h-5 text-white/90 group-hover:text-white group-hover:scale-110 transition-transform flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+            <div>
+              <div className="text-xs uppercase font-bold text-gray-300 tracking-wider">Direct Call</div>
+              <div className="text-sm sm:text-base font-bold text-white group-hover:text-white transition-colors">0918 408 0396</div>
+            </div>
+          </a>
+
+          <a
+            href="mailto:riaka.construction@yahoo.com"
+            className="flex items-center gap-3.5 p-3.5 rounded-xl hover:bg-white/[0.06] transition-all group"
+          >
+            <svg className="w-5 h-5 text-white/90 group-hover:text-white group-hover:scale-110 transition-transform flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <rect width="20" height="16" x="2" y="4" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+            <div>
+              <div className="text-xs uppercase font-bold text-gray-300 tracking-wider">Email Us</div>
+              <div className="text-xs sm:text-sm font-semibold text-white group-hover:text-white transition-colors">riaka.construction@yahoo.com</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      {/* Google Maps View Embed with Office Location Header */}
+      <div className="rounded-2xl border border-white/15 bg-[#14233c]/90 p-4 mt-4 flex-1 flex flex-col justify-between">
+        <div className="flex items-center justify-between mb-3 px-1 gap-3">
+          <div className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-gray-200">
+            <svg className="w-3.5 h-3.5 text-sky-400 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            <span>Office Location</span>
+          </div>
+
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=M.H.+Del+Pilar+St,+Lemery,+Batangas,+Philippines"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1 transition-colors flex-shrink-0"
+          >
+            <span>Open in Google Maps</span>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          </a>
+        </div>
+
+        <div className="relative w-full flex-1 min-h-[290px] rounded-xl overflow-hidden border border-white/10 shadow-inner">
+          <iframe
+            title="RIAKA Construction Office Location - Lemery, Batangas"
+            src="https://maps.google.com/maps?q=M.H.+Del+Pilar+St,+Lemery,+Batangas,+Philippines&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            className="w-full h-full border-0"
+            loading="lazy"
+            allowFullScreen
+          />
+        </div>
+
+        <div className="mt-3.5 flex items-start gap-2.5 px-1 text-xs text-gray-400">
+          <svg className="w-4 h-4 text-sky-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span>M.H. Del Pilar St., Lemery, Philippines, 4209 &bull; Mon – Sat (8:00 AM – 5:00 PM)</span>
+        </div>
+      </div>
+    </div>
+  );
+});
+
+// Validation helpers
+// Names: letters (English, Spanish, and Filipino diacritics like ñ/Ñ), spaces, hyphens, apostrophes, and periods only
+const NAME_REGEX = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s'. -]+$/;
+
+// Email: standard full email format
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+// Phone: numbers only (supports optional +, spaces, hyphens, and parentheses)
+const PHONE_CHARS_REGEX = /^[0-9+\s\-()]+$/;
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -21,14 +135,122 @@ export default function ContactSection() {
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [responseMsg, setResponseMsg] = useState('');
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setTouched((prev) => ({ ...prev, [e.target.name]: true }));
+  };
+
+  const getFieldError = (name: keyof typeof formData): string | null => {
+    if (!hasSubmitted && !touched[name]) return null;
+    const val = formData[name].trim();
+
+    if (!val) {
+      return 'Please fill out this field.';
+    }
+
+    if (name === 'first_name') {
+      if (!NAME_REGEX.test(val)) {
+        return 'First name should only include letters and valid name characters.';
+      }
+      if (val.length < 2) {
+        return 'First name must be at least 2 characters.';
+      }
+    }
+
+    if (name === 'last_name') {
+      if (!NAME_REGEX.test(val)) {
+        return 'Last name should only include letters and valid name characters.';
+      }
+      if (val.length < 2) {
+        return 'Last name must be at least 2 characters.';
+      }
+    }
+
+    if (name === 'email') {
+      if (!EMAIL_REGEX.test(val)) {
+        return 'Please enter a valid email format (e.g. name@example.com).';
+      }
+    }
+
+    if (name === 'phone') {
+      if (!PHONE_CHARS_REGEX.test(val)) {
+        return 'Contact number should contain numbers only.';
+      }
+      const digitsOnly = val.replace(/\D/g, '');
+      if (digitsOnly.length < 7 || digitsOnly.length > 15) {
+        return 'Contact number must be between 7 and 15 digits.';
+      }
+    }
+
+    return null;
+  };
+
+  const isFieldInvalid = (name: keyof typeof formData) => {
+    return getFieldError(name) !== null;
+  };
+
+  const messengerUrl = `https://m.me/RIAKAconstruction?text=${encodeURIComponent(
+    'Hello! I would like to inquire about your services and schedule a meeting to discuss our project. Please let me know your available schedule. Thank you!'
+  )}`;
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setHasSubmitted(true);
+
+    // Ensure all fields have non-whitespace characters
+    const trimmed = {
+      first_name: formData.first_name.trim(),
+      last_name: formData.last_name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      inquiry: formData.inquiry.trim(),
+      message: formData.message.trim(),
+    };
+
+    if (!trimmed.first_name || !NAME_REGEX.test(trimmed.first_name) || trimmed.first_name.length < 2) {
+      setStatus('error');
+      setResponseMsg('Please enter a valid first name (letters and valid name characters only).');
+      return;
+    }
+
+    if (!trimmed.last_name || !NAME_REGEX.test(trimmed.last_name) || trimmed.last_name.length < 2) {
+      setStatus('error');
+      setResponseMsg('Please enter a valid last name (letters and valid name characters only).');
+      return;
+    }
+
+    if (!trimmed.email || !EMAIL_REGEX.test(trimmed.email)) {
+      setStatus('error');
+      setResponseMsg('Please enter a valid email format.');
+      return;
+    }
+
+    const phoneDigits = trimmed.phone.replace(/\D/g, '');
+    if (!trimmed.phone || !PHONE_CHARS_REGEX.test(trimmed.phone) || phoneDigits.length < 7 || phoneDigits.length > 15) {
+      setStatus('error');
+      setResponseMsg('Contact number should contain numbers only (7 to 15 digits).');
+      return;
+    }
+
+    if (!trimmed.inquiry) {
+      setStatus('error');
+      setResponseMsg('Please enter your inquiry type.');
+      return;
+    }
+
+    if (!trimmed.message) {
+      setStatus('error');
+      setResponseMsg('Please enter your message or project details.');
+      return;
+    }
+
     setStatus('submitting');
     setResponseMsg('');
 
@@ -41,14 +263,16 @@ export default function ContactSection() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(trimmed),
       });
 
       const result = await res.json();
 
       if (res.ok && result.success) {
         setStatus('success');
-        setResponseMsg(result.message || 'Thank you! Your quote request has been sent successfully.');
+        setHasSubmitted(false);
+        setTouched({});
+        setResponseMsg(result.message || 'Thank you! Your inquiry has been sent successfully. Our team will contact you shortly to schedule a consultation.');
         setFormData({
           first_name: '',
           last_name: '',
@@ -68,98 +292,19 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative pt-6 pb-20 lg:pt-8 lg:pb-28 px-6 lg:px-16 bg-navy text-white overflow-hidden scroll-mt-20">
+    <section id="contact" className="relative pt-6 pb-20 lg:pt-8 lg:pb-28 px-6 lg:px-16 bg-transparent text-white overflow-hidden scroll-mt-20">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
-          
-          {/* Left Column: RIAKA Information & Google Maps View */}
-          <div className="lg:col-span-6 flex flex-col h-full justify-between">
-            <div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15] mb-5">
-                Let&apos;s Build Something{' '}
-                <span className="text-skyblue">
-                  Exceptional.
-                </span>
-              </h1>
-              <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-8">
-                Got a project in mind? We provide transparent quotations, detailed bills of materials, and realistic timelines with no generic proposals or hidden costs.
-              </p>
 
-              {/* Quick Contact Links (boxes of the icons removed) */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                <a
-                  href="tel:+639184080396"
-                  className="flex items-center gap-3.5 p-3.5 rounded-xl hover:bg-white/[0.06] transition-all group"
-                >
-                  <svg className="w-5 h-5 text-white/90 group-hover:text-white group-hover:scale-110 transition-transform flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                  </svg>
-                  <div>
-                    <div className="text-xs uppercase font-bold text-gray-300 tracking-wider">Direct Call</div>
-                    <div className="text-sm sm:text-base font-bold text-white group-hover:text-white transition-colors">0918 408 0396</div>
-                  </div>
-                </a>
+          {/* Left Column: Memoized to eliminate typing re-render overhead on iframe */}
+          <ContactInfoSection />
 
-                <a
-                  href="mailto:riaka.construction@yahoo.com"
-                  className="flex items-center gap-3.5 p-3.5 rounded-xl hover:bg-white/[0.06] transition-all group"
-                >
-                  <svg className="w-5 h-5 text-white/90 group-hover:text-white group-hover:scale-110 transition-transform flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                    <rect width="20" height="16" x="2" y="4" rx="2" />
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                  </svg>
-                  <div>
-                    <div className="text-xs uppercase font-bold text-gray-300 tracking-wider">Email Us</div>
-                    <div className="text-xs sm:text-sm font-semibold text-white truncate max-w-[180px] group-hover:text-white transition-colors">riaka.construction@yahoo.com</div>
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            {/* Google Maps View Embed (OFFICE LOCATION removed, flex-1 so bottoms align) */}
-            <div className="rounded-2xl border border-white/15 bg-white/[0.03] p-4 backdrop-blur-sm mt-4 flex-1 flex flex-col justify-between">
-              <div className="flex items-center justify-end mb-3 px-1">
-                <a
-                  href="https://www.google.com/maps/search/?api=1&query=M.H.+Del+Pilar+St,+Lemery,+Batangas,+Philippines"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1 transition-colors"
-                >
-                  <span>Open in Google Maps</span>
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
-                  </svg>
-                </a>
-              </div>
-
-              <div className="relative w-full flex-1 min-h-[290px] rounded-xl overflow-hidden border border-white/10 shadow-inner">
-                <iframe
-                  title="RIAKA Construction Office Location - Lemery, Batangas"
-                  src="https://maps.google.com/maps?q=M.H.+Del+Pilar+St,+Lemery,+Batangas,+Philippines&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                  className="w-full h-full border-0 filter brightness-[0.88] contrast-[1.05]"
-                  loading="lazy"
-                  allowFullScreen
-                />
-              </div>
-
-              <div className="mt-3.5 flex items-start gap-2.5 px-1 text-xs text-gray-400">
-                <svg className="w-4 h-4 text-sky-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                <span>M.H. Del Pilar St., Lemery, Philippines, 4209 &bull; Mon – Sat (8:00 AM – 5:00 PM)</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: "Get a Quote" Form Box */}
+          {/* Right Column: "Get in Touch" Form Box (Optimized solid hardware-accelerated background) */}
           <div className="lg:col-span-6 flex flex-col h-full">
-            <div className="bg-[#1c2e4a]/95 border border-white/15 rounded-2xl p-6 sm:p-9 shadow-2xl backdrop-blur-md h-full flex flex-col justify-between">
+            <div className="bg-[#162744] border border-white/15 rounded-2xl p-6 sm:p-9 shadow-2xl h-full flex flex-col justify-between">
               <div>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-7">
-                  Get a Quote
+                  Get in Touch
                 </h2>
 
                 {status === 'success' ? (
@@ -169,9 +314,9 @@ export default function ContactSection() {
                         <path d="M20 6 9 17l-5-5" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-bold text-white">Quote Request Received!</h3>
+                    <h3 className="text-xl font-bold text-white">Inquiry Received!</h3>
                     <p className="text-gray-300 text-sm leading-relaxed max-w-md mx-auto">
-                      {responseMsg || 'Thank you for reaching out to RIAKA Construction. Our engineering team will review your project details and contact you shortly.'}
+                      {responseMsg || 'Thank you for reaching out to RIAKA Construction. Our engineering team will review your project details and contact you shortly to schedule a consultation.'}
                     </p>
                     <button
                       type="button"
@@ -182,12 +327,12 @@ export default function ContactSection() {
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form noValidate onSubmit={handleSubmit} className="space-y-4">
                     {/* First name * & Last name * (Two Column) */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="first_name" className="block text-sm font-medium text-white mb-2">
-                          First name <span className="text-white">*</span>
+                          First name <span className="text-red-500 font-bold">*</span>
                         </label>
                         <input
                           id="first_name"
@@ -196,13 +341,21 @@ export default function ContactSection() {
                           required
                           value={formData.first_name}
                           onChange={handleChange}
+                          onBlur={handleBlur}
                           placeholder="Enter your first name"
-                          className="w-full bg-[#15243b] border border-white/20 rounded-md px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400/50 transition-colors"
+                          className={`w-full bg-[#15243b] rounded-md px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:outline-none transition-colors ${
+                            isFieldInvalid('first_name')
+                              ? 'border border-red-500 focus:border-red-400 focus:ring-1 focus:ring-red-400/50'
+                              : 'border border-white/20 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/50'
+                          }`}
                         />
+                        {isFieldInvalid('first_name') && (
+                          <FieldError message={getFieldError('first_name') || undefined} />
+                        )}
                       </div>
                       <div>
                         <label htmlFor="last_name" className="block text-sm font-medium text-white mb-2">
-                          Last name <span className="text-white">*</span>
+                          Last name <span className="text-red-500 font-bold">*</span>
                         </label>
                         <input
                           id="last_name"
@@ -211,16 +364,24 @@ export default function ContactSection() {
                           required
                           value={formData.last_name}
                           onChange={handleChange}
+                          onBlur={handleBlur}
                           placeholder="Enter your last name"
-                          className="w-full bg-[#15243b] border border-white/20 rounded-md px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400/50 transition-colors"
+                          className={`w-full bg-[#15243b] rounded-md px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:outline-none transition-colors ${
+                            isFieldInvalid('last_name')
+                              ? 'border border-red-500 focus:border-red-400 focus:ring-1 focus:ring-red-400/50'
+                              : 'border border-white/20 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/50'
+                          }`}
                         />
+                        {isFieldInvalid('last_name') && (
+                          <FieldError message={getFieldError('last_name') || undefined} />
+                        )}
                       </div>
                     </div>
 
                     {/* Email * */}
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
-                        Email <span className="text-white">*</span>
+                        Email <span className="text-red-500 font-bold">*</span>
                       </label>
                       <input
                         id="email"
@@ -229,15 +390,23 @@ export default function ContactSection() {
                         required
                         value={formData.email}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="Enter your email"
-                        className="w-full bg-[#15243b] border border-white/20 rounded-md px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400/50 transition-colors"
+                        className={`w-full bg-[#15243b] rounded-md px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:outline-none transition-colors ${
+                          isFieldInvalid('email')
+                            ? 'border border-red-500 focus:border-red-400 focus:ring-1 focus:ring-red-400/50'
+                            : 'border border-white/20 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/50'
+                        }`}
                       />
+                      {isFieldInvalid('email') && (
+                        <FieldError message={getFieldError('email') || undefined} />
+                      )}
                     </div>
 
                     {/* Contact Number * */}
                     <div>
                       <label htmlFor="phone" className="block text-sm font-medium text-white mb-2">
-                        Contact Number <span className="text-white">*</span>
+                        Contact Number <span className="text-red-500 font-bold">*</span>
                       </label>
                       <input
                         id="phone"
@@ -246,15 +415,23 @@ export default function ContactSection() {
                         required
                         value={formData.phone}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="Enter your contact number"
-                        className="w-full bg-[#15243b] border border-white/20 rounded-md px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400/50 transition-colors"
+                        className={`w-full bg-[#15243b] rounded-md px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:outline-none transition-colors ${
+                          isFieldInvalid('phone')
+                            ? 'border border-red-500 focus:border-red-400 focus:ring-1 focus:ring-red-400/50'
+                            : 'border border-white/20 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/50'
+                        }`}
                       />
+                      {isFieldInvalid('phone') && (
+                        <FieldError message={getFieldError('phone') || undefined} />
+                      )}
                     </div>
 
                     {/* Inquiry * */}
                     <div>
                       <label htmlFor="inquiry" className="block text-sm font-medium text-white mb-2">
-                        Inquiry <span className="text-white">*</span>
+                        Inquiry <span className="text-red-500 font-bold">*</span>
                       </label>
                       <input
                         id="inquiry"
@@ -263,15 +440,23 @@ export default function ContactSection() {
                         required
                         value={formData.inquiry}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="Enter your inquiry"
-                        className="w-full bg-[#15243b] border border-white/20 rounded-md px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400/50 transition-colors"
+                        className={`w-full bg-[#15243b] rounded-md px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:outline-none transition-colors ${
+                          isFieldInvalid('inquiry')
+                            ? 'border border-red-500 focus:border-red-400 focus:ring-1 focus:ring-red-400/50'
+                            : 'border border-white/20 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/50'
+                        }`}
                       />
+                      {isFieldInvalid('inquiry') && (
+                        <FieldError message={getFieldError('inquiry') || undefined} />
+                      )}
                     </div>
 
                     {/* Message * */}
                     <div>
                       <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
-                        Message <span className="text-white">*</span>
+                        Message <span className="text-red-500 font-bold">*</span>
                       </label>
                       <textarea
                         id="message"
@@ -280,9 +465,17 @@ export default function ContactSection() {
                         rows={4}
                         value={formData.message}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="Enter your message"
-                        className="w-full bg-[#132035] border border-white/20 rounded-md px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400/50 transition-colors resize-y min-h-[110px]"
+                        className={`w-full bg-[#132035] rounded-md px-4 py-3 text-sm text-white placeholder:text-gray-400 focus:outline-none transition-colors resize-y min-h-[110px] ${
+                          isFieldInvalid('message')
+                            ? 'border border-red-500 focus:border-red-400 focus:ring-1 focus:ring-red-400/50'
+                            : 'border border-white/20 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/50'
+                        }`}
                       />
+                      {isFieldInvalid('message') && (
+                        <FieldError message={getFieldError('message') || undefined} />
+                      )}
                     </div>
 
                     {/* Error Notification if any */}
@@ -297,7 +490,7 @@ export default function ContactSection() {
                       </div>
                     )}
 
-                    {/* Submit Button (Matches Get a Quote button) */}
+                    {/* Submit Button (Matches Get in Touch button) */}
                     <div className="pt-2">
                       <button
                         type="submit"
@@ -321,12 +514,12 @@ export default function ContactSection() {
                     {/* Or chat us */}
                     <div className="relative flex py-1 items-center">
                       <div className="flex-grow border-t border-white/15"></div>
-                      <span className="flex-shrink mx-4 text-xs font-medium text-gray-400 uppercase tracking-wider">or chat us</span>
+                      <span className="flex-shrink mx-4 text-xs font-medium text-gray-400 uppercase tracking-wider">or</span>
                       <div className="flex-grow border-t border-white/15"></div>
                     </div>
 
                     <a
-                      href="https://m.me/RIAKAconstruction"
+                      href={messengerUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full py-3.5 px-5 rounded-md font-bold text-sm text-white bg-[#0084FF]/85 hover:bg-[#0084FF] active:bg-[#0063cc] transition-all flex items-center justify-center gap-2.5 shadow-md hover:shadow-[#0084FF]/25 group cursor-pointer"

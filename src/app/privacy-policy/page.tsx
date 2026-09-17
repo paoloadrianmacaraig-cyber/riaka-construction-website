@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
 import CTASection from '@/components/CTASection';
 import ScrollReveal from '@/components/ScrollReveal';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | RIAKA Construction & Development Corp.',
@@ -61,72 +61,71 @@ const policySections = [
   },
   {
     number: '4',
-    title: 'Philippine Data Privacy Act (RA 10173) Compliance',
+    title: 'Legal Basis for Processing',
     content: (
       <p>
-        We adhere to the core principles of transparency, legitimate purpose, and proportionality under the Data Privacy Act of 2012.
-        Your data is processed solely with your explicit consent or under lawful civil contracts, and only to the extent necessary
-        to fulfill contracted architectural and civil construction deliverables.
+        We process your data primarily for the fulfillment of our construction and design contracts, compliance with legal obligations
+        (such as National Building Code requirements and Bureau of Internal Revenue regulations), and legitimate corporate interests
+        in executing safe, durable developments.
       </p>
     ),
   },
   {
     number: '5',
-    title: 'Technical Plans & Blueprints Protection',
-    content: (
-      <p>
-        We recognize the sensitive nature of architectural floor plans, engineering calculations, and property boundary records.
-        All client drawings are treated as confidential proprietary records and stored in secure digital vaults. They are only
-        shared with licensed project engineers and authorized building regulatory authorities.
-      </p>
-    ),
-  },
-  {
-    number: '6',
-    title: 'Third-Party Sharing & Subcontractors',
-    content: (
-      <p>
-        RIAKA does not sell, trade, or rent personal data to third-party marketing companies. Data is disclosed only to vetted
-        trade partners (such as licensed geotechnical soil testers, master plumbers, or structural consultants) who are bound by
-        strict confidentiality agreements, or when required by lawful governmental orders.
-      </p>
-    ),
-  },
-  {
-    number: '7',
-    title: 'Data Security & Storage',
-    content: (
-      <p>
-        We implement technical, organizational, and physical safeguards against unauthorized disclosure, alteration, or accidental loss.
-        As-built structural calculations and project agreements are archived for 15 years in compliance with Article 1723 of the
-        Civil Code of the Philippines regarding contractor and architect liability.
-      </p>
-    ),
-  },
-  {
-    number: '8',
-    title: 'Your Rights as a Data Subject',
+    title: 'Data Retention & Safeguards',
     content: (
       <div className="space-y-3">
         <p>
-          Under Republic Act No. 10173, you hold the following statutory rights:
+          RIAKA applies physical, technical, and organizational security measures to protect your documents:
         </p>
         <ul className="list-disc list-inside space-y-1.5 pl-2 text-gray-700">
-          <li><strong>Right to be Informed:</strong> Understand how your personal records are handled.</li>
-          <li><strong>Right to Access:</strong> Request reasonable access to your personal information on file.</li>
-          <li><strong>Right to Rectification:</strong> Dispute inaccuracies and request prompt corrections.</li>
-          <li><strong>Right to Erasure or Blocking:</strong> Request removal of your data, subject to legal building record retention laws.</li>
+          <li><strong>Digital Security:</strong> Encrypted storage, firewalls, and restricted administrative access to project folders.</li>
+          <li><strong>Physical Safety:</strong> Blueprint blue-line prints, contracts, and permits are stored in locked archives within our main Batangas office.</li>
+          <li><strong>Retention Period:</strong> In compliance with Article 1723 of the Philippine Civil Code (15-year engineer/architect warranty liability), project drawings, calculation sheets, and contract records are retained for a minimum of 15 years following project completion.</li>
         </ul>
       </div>
     ),
   },
   {
-    number: '9',
+    number: '6',
+    title: 'Third-Party Disclosure',
+    content: (
+      <div className="space-y-3">
+        <p>
+          We do not sell, trade, or rent personal information to marketing third parties. Data is shared exclusively with:
+        </p>
+        <ul className="list-disc list-inside space-y-1.5 pl-2 text-gray-700">
+          <li><strong>Government Agencies:</strong> Municipal Engineering Offices, BFP, and utility providers (e.g., BATELEC, Meralco) for essential permits and clearances.</li>
+          <li><strong>Accredited Subcontractors:</strong> Structural engineers, soil-testing labs, and specialty trades under strict non-disclosure obligations.</li>
+          <li><strong>Financial Institutions:</strong> In cases where we assist you with bank loan applications for construction financing, with your explicit authorization.</li>
+        </ul>
+      </div>
+    ),
+  },
+  {
+    number: '7',
+    title: 'Your Privacy Rights (RA 10173)',
+    content: (
+      <div className="space-y-3">
+        <p>
+          Under the Philippine Data Privacy Act of 2012, you possess the right to:
+        </p>
+        <ul className="list-disc list-inside space-y-1.5 pl-2 text-gray-700">
+          <li>Be informed whether your personal data is being processed.</li>
+          <li>Request reasonable access to your personal files and project records held by RIAKA.</li>
+          <li>Request correction or rectification of any erroneous or outdated information.</li>
+          <li>Object to certain processing activities, subject to ongoing statutory and contractual requirements.</li>
+        </ul>
+      </div>
+    ),
+  },
+  {
+    number: '8',
     title: 'Contact Our Data Protection Officer',
     content: (
       <div className="space-y-3">
         <p>
-          If you have questions, feedback, or requests regarding your personal records or this Privacy Policy, please contact
+          If you have questions, clarifications, or requests regarding this Privacy Policy or how your personal information is handled, please contact
           our compliance team:
         </p>
         <div className="bg-gray-50 rounded-lg p-4 border border-gray-200/80 text-xs text-gray-700 space-y-1">
@@ -145,23 +144,14 @@ export default function PrivacyPolicyPage() {
     <>
       <Navbar />
       <main className="min-h-screen bg-[#f8fafc]">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-br from-navy via-[#1b2f4f] to-[#142338] text-white pt-28 pb-16 md:pt-36 md:pb-20 px-6 lg:px-16">
-          <div className="max-w-4xl mx-auto">
-            {/* Breadcrumb Back Link */}
-            <div className="mb-6">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-xs font-semibold text-skyblue hover:text-white transition-colors"
-              >
-                <span>&larr;</span> Back to Home
-              </Link>
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 uppercase tracking-tight text-white">
+        {/* Page Header / Breadcrumb Hero Banner */}
+        <section className="bg-navy text-white pt-24 lg:pt-28 pb-10 sm:pb-12 px-6 lg:px-16 border-b border-white/10">
+          <div className="max-w-4xl mx-auto pt-4">
+            <Breadcrumb items={[{ label: 'Privacy Policy' }]} className="mb-5" />
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-3 uppercase tracking-tight text-white">
               Privacy Policy
             </h1>
-            <p className="text-base sm:text-lg text-gray-300 font-medium">
+            <p className="text-sm sm:text-base text-gray-300 font-medium">
               Effective Date: January 6, 2026
             </p>
           </div>

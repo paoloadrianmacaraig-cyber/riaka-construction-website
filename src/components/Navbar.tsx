@@ -211,7 +211,7 @@ export default function Navbar() {
             href="/contact"
             className="hidden lg:flex items-center justify-center bg-navy/90 text-white font-bold text-sm tracking-wide rounded-full px-6 py-2.5 hover:bg-navy hover:shadow transition-all duration-200 shadow-sm"
           >
-            Get a Quote
+            Get in Touch
           </Link>
 
           {/* Hamburger */}
@@ -385,7 +385,7 @@ export default function Navbar() {
               className="flex items-center justify-center font-bold text-white bg-navy/90 rounded-full py-3.5 px-6 text-sm tracking-wide shadow-md hover:bg-navy active:scale-[0.98] transition-all duration-200"
               onClick={closeMobileMenu}
             >
-              <span>Get a Quote</span>
+              <span>Get in Touch</span>
             </Link>
           </li>
         </ul>

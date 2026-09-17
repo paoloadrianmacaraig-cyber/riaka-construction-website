@@ -32,7 +32,7 @@ const quickLinks = [
   { href: '/#services', label: 'Our Services' },
   { href: '/#projects', label: 'Featured Projects' },
   { href: '/#process', label: 'Our Workflow' },
-  { href: '/contact', label: 'Get a Quote' },
+  { href: '/contact', label: 'Get in Touch' },
 ];
 
 export default function Footer() {
@@ -106,7 +106,7 @@ export default function Footer() {
                 <span>Facebook Page</span>
               </a>
               <a
-                href="https://m.me/RIAKAconstruction"
+                href={`https://m.me/RIAKAconstruction?text=${encodeURIComponent('Hello! I would like to inquire about your services and schedule a meeting to discuss our project. Please let me know your available schedule. Thank you!')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Chat with RIAKA Construction on Facebook Messenger"

@@ -41,7 +41,7 @@ export default function CTASection() {
         </h2>
         <p className="text-white/90 font-medium text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-9 drop-shadow-sm">
           Let&apos;s build something exceptional together. Tell us about your next project, and our
-          team will provide a transparent quotation and timeline to get started.
+          team will get in touch to schedule a consultation.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -49,7 +49,7 @@ export default function CTASection() {
             href="/contact"
             className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white text-navy hover:bg-gray-100 hover:text-navy font-extrabold text-sm sm:text-base px-8 py-4 rounded-xl shadow-2xl transition-all duration-200 hover:-translate-y-0.5"
           >
-            <span>Request a Project Quotation</span>
+            <span>Get in Touch</span>
             <svg
               className="w-4 h-4 flex-shrink-0"
               fill="none"
@@ -74,13 +74,13 @@ export default function CTASection() {
           </a>
 
           <a
-            href="https://m.me/RIAKAconstruction"
+            href={`https://m.me/RIAKAconstruction?text=${encodeURIComponent('Hello! I would like to inquire about your services and schedule a meeting to discuss our project. Please let me know your available schedule. Thank you!')}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#0084FF]/85 hover:bg-[#0084FF] text-white font-bold text-sm sm:text-base px-7 py-4 rounded-xl shadow-xl transition-all duration-200 hover:-translate-y-0.5"
           >
             <FacebookMessengerIcon />
-            <span>Inquire on Facebook</span>
+            <span>Chat on Messenger</span>
           </a>
         </div>
 
