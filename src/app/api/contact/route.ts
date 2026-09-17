@@ -1,7 +1,17 @@
 import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 import { spawn } from 'child_process';
 import path from 'path';
 import fs from 'fs';
+
+function escapeHtml(str: string) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
 
 export async function POST(request: Request) {
   try {
@@ -75,7 +85,91 @@ export async function POST(request: Request) {
       message,
     };
 
-    // Check for XAMPP PHPMailer script
+    // 1. Send via Nodemailer if SMTP credentials are configured (Vercel & production)
+    const smtpUser = process.env.SMTP_USER;
+    const smtpPass = process.env.SMTP_PASS;
+    const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com';
+    const smtpPort = Number(process.env.SMTP_PORT) || 465;
+
+    if (smtpUser && smtpPass) {
+      try {
+        const transporter = nodemailer.createTransport({
+          host: smtpHost,
+          port: smtpPort,
+          secure: smtpPort === 465,
+          auth: {
+            user: smtpUser,
+            pass: smtpPass,
+          },
+        });
+
+        const safeFullName = escapeHtml(`${first_name} ${last_name}`);
+        const safeEmail = escapeHtml(email);
+        const safePhone = escapeHtml(phone);
+        const safeInquiry = escapeHtml(inquiry);
+        const safeMessage = escapeHtml(message).replace(/\n/g, '<br>');
+        const submittedAt = new Date().toLocaleString('en-US', {
+          timeZone: 'Asia/Manila',
+          dateStyle: 'long',
+          timeStyle: 'short',
+        });
+
+        await transporter.sendMail({
+          from: `"RIAKA Website - ${first_name} ${last_name}" <${smtpUser}>`,
+          to: smtpUser,
+          replyTo: email,
+          subject: `New RIAKA Inquiry: [${inquiry}] from ${first_name} ${last_name}`,
+          text: `New Website Inquiry\n\nName: ${first_name} ${last_name}\nEmail: ${email}\nPhone: ${phone}\nInquiry: ${inquiry}\n\nMessage:\n${message}\n\nSubmitted on: ${submittedAt}`,
+          html: `
+          <div style='font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #ffffff;'>
+            <div style='background: #23395d; color: #ffffff; padding: 24px; text-align: center;'>
+              <h1 style='margin: 0; font-size: 20px; text-transform: uppercase; letter-spacing: 1.5px;'>RIAKA Construction</h1>
+              <p style='margin: 6px 0 0; font-size: 13px; color: #9ed4ff;'>New Website Inquiry & Consultation Request</p>
+            </div>
+            <div style='padding: 26px; color: #2d3748; line-height: 1.6;'>
+              <div style='margin-bottom: 14px; border-bottom: 1px solid #edf2f7; padding-bottom: 10px;'>
+                <span style='font-size: 11px; text-transform: uppercase; font-weight: bold; color: #718096; display: block;'>Client Name</span>
+                <strong style='font-size: 16px; color: #1a202c;'>${safeFullName}</strong>
+              </div>
+              <div style='margin-bottom: 14px; border-bottom: 1px solid #edf2f7; padding-bottom: 10px;'>
+                <span style='font-size: 11px; text-transform: uppercase; font-weight: bold; color: #718096; display: block;'>Email Address</span>
+                <a href='mailto:${safeEmail}' style='color: #2b6cb0; text-decoration: none;'>${safeEmail}</a>
+              </div>
+              <div style='margin-bottom: 14px; border-bottom: 1px solid #edf2f7; padding-bottom: 10px;'>
+                <span style='font-size: 11px; text-transform: uppercase; font-weight: bold; color: #718096; display: block;'>Contact Number</span>
+                <a href='tel:${safePhone}' style='color: #2b6cb0; text-decoration: none;'>${safePhone}</a>
+              </div>
+              <div style='margin-bottom: 14px; border-bottom: 1px solid #edf2f7; padding-bottom: 10px;'>
+                <span style='font-size: 11px; text-transform: uppercase; font-weight: bold; color: #718096; display: block;'>Inquiry Type</span>
+                <span style='font-size: 15px; font-weight: bold; color: #23395d;'>${safeInquiry}</span>
+              </div>
+              <div style='margin-top: 18px;'>
+                <span style='font-size: 11px; text-transform: uppercase; font-weight: bold; color: #718096; display: block; margin-bottom: 6px;'>Project Details / Message</span>
+                <div style='background: #f7fafc; border-left: 4px solid #23395d; padding: 14px; border-radius: 4px; font-size: 14px;'>${safeMessage}</div>
+              </div>
+              <p style='font-size: 11px; color: #a0aec0; margin-top: 20px; text-align: right;'>Submitted on: ${submittedAt}</p>
+            </div>
+            <div style='background: #edf2f7; padding: 14px; text-align: center; font-size: 11px; color: #718096;'>
+              RIAKA Construction & Development Corp. &bull; Lemery, Batangas, Philippines
+            </div>
+          </div>
+          `,
+        });
+
+        return NextResponse.json({
+          success: true,
+          message: 'Thank you! Your inquiry has been sent successfully. Our team will contact you promptly to schedule a consultation.',
+        });
+      } catch (nodemailerErr) {
+        console.error('[Nodemailer error]:', nodemailerErr);
+        return NextResponse.json(
+          { success: false, message: 'Failed to send inquiry via email. Please check SMTP configuration.' },
+          { status: 500 }
+        );
+      }
+    }
+
+    // 2. Check for local XAMPP PHPMailer script (fallback for local development)
     const xamppPhp = 'C:\\xampp\\php\\php.exe';
     const xamppMailScript = 'C:\\xampp\\htdocs\\phpmailer\\mail.php';
 
@@ -139,7 +233,7 @@ export async function POST(request: Request) {
       });
     }
 
-    // Fallback if XAMPP is not present
+    // 3. Fallback if neither SMTP nor XAMPP is available
     console.log('[RIAKA Contact Form Fallback]:', payload);
     return NextResponse.json({
       success: true,
