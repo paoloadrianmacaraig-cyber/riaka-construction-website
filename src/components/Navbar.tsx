@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -27,13 +27,60 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [isPastHero, setIsPastHero] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+
+  const menuOpenRef = useRef(menuOpen);
+  useEffect(() => {
+    menuOpenRef.current = menuOpen;
+    if (menuOpen) {
+      setIsVisible(true);
+    }
+  }, [menuOpen]);
 
   useEffect(() => {
+    let lastScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+    let ticking = false;
+
     const handleScroll = () => {
-      setIsPastHero(window.scrollY > 15);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const clampedScrollY = Math.max(0, currentScrollY);
+
+          setIsPastHero(clampedScrollY > 15);
+
+          if (menuOpenRef.current) {
+            setIsVisible(true);
+            lastScrollY = clampedScrollY;
+            ticking = false;
+            return;
+          }
+
+          // Always show navbar near the top of page
+          if (clampedScrollY <= 30) {
+            setIsVisible(true);
+          } else {
+            const diff = clampedScrollY - lastScrollY;
+            // Scrolling down -> hide navbar
+            if (diff > 6) {
+              setIsVisible(false);
+            }
+            // Scrolling up -> reveal navbar
+            else if (diff < -6) {
+              setIsVisible(true);
+            }
+          }
+
+          lastScrollY = clampedScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -79,7 +126,7 @@ export default function Navbar() {
         id="navbar"
         className={`flex items-center px-6 lg:px-16 backdrop-blur-md lg:backdrop-blur-lg ${
           isPastHero ? 'is-past-hero' : ''
-        }`}
+        } ${!isVisible ? 'is-hidden' : ''}`}
       >
         <div className="max-w-screen-xl mx-auto w-full flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
@@ -171,31 +218,32 @@ export default function Navbar() {
           <button
             id="menu-btn"
             type="button"
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            className="lg:hidden flex flex-col gap-[5px] cursor-pointer p-1"
+            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-xl text-navy hover:bg-navy/5 active:scale-90 transition-all duration-200 border-none bg-transparent cursor-pointer focus:outline-none"
             onClick={() => setMenuOpen((o) => !o)}
           >
-            <span
-              id="bar1"
-              className="block w-6 h-0.5 bg-navy transition-all duration-300"
-              style={{
-                transform: menuOpen ? 'translateY(7px) rotate(45deg)' : '',
-              }}
-            />
-            <span
-              id="bar2"
-              className="block w-6 h-0.5 bg-navy transition-all duration-300"
-              style={{ opacity: menuOpen ? '0' : '' }}
-            />
-            <span
-              id="bar3"
-              className="block w-6 h-0.5 bg-navy transition-all duration-300"
-              style={{
-                transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : '',
-              }}
-            />
+            <div className="w-6 h-5 relative flex items-center justify-center pointer-events-none">
+              <span
+                id="bar1"
+                className={`absolute left-0 top-[9px] w-6 h-[2px] bg-navy rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  menuOpen ? 'rotate-45 translate-y-0' : '-translate-y-[7px] rotate-0'
+                }`}
+              />
+              <span
+                id="bar2"
+                className={`absolute left-0 top-[9px] w-6 h-[2px] bg-navy rounded-full transition-all duration-200 ease-out ${
+                  menuOpen ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'
+                }`}
+              />
+              <span
+                id="bar3"
+                className={`absolute left-0 top-[9px] w-6 h-[2px] bg-navy rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  menuOpen ? '-rotate-45 translate-y-0' : 'translate-y-[7px] rotate-0'
+                }`}
+              />
+            </div>
           </button>
         </div>
       </nav>
@@ -228,13 +276,10 @@ export default function Navbar() {
           >
             <Link
               href="/#about"
-              className="group flex items-center justify-between py-2.5 px-3.5 rounded-xl font-bold text-navy text-[16px] tracking-wide hover:bg-navy/5 hover:text-blue hover:translate-x-1 active:scale-[0.99] transition-all duration-200"
+              className="group flex items-center py-2.5 px-3.5 rounded-xl font-bold text-navy text-[16px] tracking-wide hover:bg-navy/5 hover:text-blue hover:translate-x-1 active:scale-[0.99] transition-all duration-200"
               onClick={closeMobileMenu}
             >
-              <span className="nav-link">About</span>
-              <svg className="w-4 h-4 text-navy/30 group-hover:text-blue transition-colors duration-200 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                <path d="m9 18 6-6-6-6" />
-              </svg>
+              <span>About</span>
             </Link>
           </li>
 
@@ -248,7 +293,7 @@ export default function Navbar() {
             <div className="flex items-center justify-between py-2.5 px-3.5 rounded-xl font-bold text-navy text-[16px] tracking-wide hover:bg-navy/5">
               <Link
                 href="/#services"
-                className="flex-1 nav-link"
+                className="flex-1"
                 onClick={closeMobileMenu}
               >
                 Services
@@ -257,7 +302,7 @@ export default function Navbar() {
                 type="button"
                 aria-label="Toggle services submenu"
                 onClick={() => setMobileServicesOpen((o) => !o)}
-                className="p-1 rounded-lg hover:bg-navy/10 text-navy/60 transition-colors"
+                className="p-1 rounded-lg hover:bg-navy/10 text-navy/60 transition-colors border-none bg-transparent cursor-pointer focus:outline-none"
               >
                 <svg
                   className={`w-4 h-4 transition-transform duration-200 ${
@@ -305,13 +350,10 @@ export default function Navbar() {
           >
             <Link
               href="/#projects"
-              className="group flex items-center justify-between py-2.5 px-3.5 rounded-xl font-bold text-navy text-[16px] tracking-wide hover:bg-navy/5 hover:text-blue hover:translate-x-1 active:scale-[0.99] transition-all duration-200"
+              className="group flex items-center py-2.5 px-3.5 rounded-xl font-bold text-navy text-[16px] tracking-wide hover:bg-navy/5 hover:text-blue hover:translate-x-1 active:scale-[0.99] transition-all duration-200"
               onClick={closeMobileMenu}
             >
-              <span className="nav-link">Projects</span>
-              <svg className="w-4 h-4 text-navy/30 group-hover:text-blue transition-colors duration-200 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                <path d="m9 18 6-6-6-6" />
-              </svg>
+              <span>Projects</span>
             </Link>
           </li>
 
@@ -324,13 +366,10 @@ export default function Navbar() {
           >
             <Link
               href="/#process"
-              className="group flex items-center justify-between py-2.5 px-3.5 rounded-xl font-bold text-navy text-[16px] tracking-wide hover:bg-navy/5 hover:text-blue hover:translate-x-1 active:scale-[0.99] transition-all duration-200"
+              className="group flex items-center py-2.5 px-3.5 rounded-xl font-bold text-navy text-[16px] tracking-wide hover:bg-navy/5 hover:text-blue hover:translate-x-1 active:scale-[0.99] transition-all duration-200"
               onClick={closeMobileMenu}
             >
-              <span className="nav-link">Process</span>
-              <svg className="w-4 h-4 text-navy/30 group-hover:text-blue transition-colors duration-200 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                <path d="m9 18 6-6-6-6" />
-              </svg>
+              <span>Process</span>
             </Link>
           </li>
 
@@ -343,13 +382,10 @@ export default function Navbar() {
           >
             <Link
               href="/#contact"
-              className="flex items-center justify-center gap-2 font-bold text-white bg-navy rounded-full py-3.5 px-6 text-sm tracking-wide shadow-md hover:opacity-90 active:scale-[0.98] transition-all duration-200"
+              className="flex items-center justify-center font-bold text-white bg-navy rounded-full py-3.5 px-6 text-sm tracking-wide shadow-md hover:opacity-90 active:scale-[0.98] transition-all duration-200"
               onClick={closeMobileMenu}
             >
               <span>Get in Touch</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
             </Link>
           </li>
         </ul>

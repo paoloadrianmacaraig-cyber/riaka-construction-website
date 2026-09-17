@@ -86,7 +86,8 @@ export default function HeroSection() {
                 className="hero-img"
                 style={{ objectFit: 'cover', objectPosition: 'center' }}
                 priority={i <= 1}
-                sizes="100vw"
+                quality={90}
+                sizes="(max-width: 768px) 180vh, (max-width: 1200px) 100vw, 100vw"
               />
               <div className="absolute inset-0 hero-overlay pointer-events-none" />
             </div>

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "swiper/css";
 @import "swiper/css/effect-fade";
+
 /* ==============================================================================
    Tailwind v4 CSS-first theme configuration
    ============================================================================== */
@@ -51,7 +52,9 @@ body {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
   transform: translate3d(0, 0, 0);
   isolation: isolate;
+  will-change: transform;
   transition:
+    transform 0.4s var(--apple-ease),
     background-color 0.35s ease,
     -webkit-backdrop-filter 0.35s ease,
     backdrop-filter 0.35s ease,
@@ -71,6 +74,39 @@ body {
   backdrop-filter: blur(20px);
   border-bottom-color: rgba(229, 231, 235, 0.7);
   box-shadow: 0 6px 24px -4px rgba(0, 0, 0, 0.09);
+}
+
+#navbar.is-hidden:not(:focus-within) {
+  transform: translate3d(0, calc(-100% - 10px), 0);
+  box-shadow: none;
+}
+
+#menu-btn {
+  border: none;
+  outline: none;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#menu-btn:focus,
+#menu-btn:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+#mobile-menu a,
+#mobile-menu a:hover,
+#mobile-menu a:active,
+#mobile-menu a:focus,
+#mobile-menu span {
+  text-decoration: none !important;
+}
+
+#mobile-menu .nav-link::after,
+#mobile-menu a::after,
+#mobile-menu span::after {
+  display: none !important;
+  content: none !important;
 }
 
 .nav-link {
@@ -138,8 +174,13 @@ body {
 }
 
 @keyframes kenBurnsZoom {
-  0%   { transform: scale(1.04); }
-  100% { transform: scale(1.0); }
+  0% {
+    transform: scale(1.04);
+  }
+
+  100% {
+    transform: scale(1.0);
+  }
 }
 
 .hero-swiper .swiper-slide .hero-img {
@@ -156,13 +197,11 @@ body {
 }
 
 .hero-overlay {
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.92) 0%,
-    rgba(0, 0, 0, 0.8) 32%,
-    rgba(0, 0, 0, 0.4) 60%,
-    rgba(0, 0, 0, 0.1) 100%
-  );
+  background: linear-gradient(to right,
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.8) 32%,
+      rgba(0, 0, 0, 0.4) 60%,
+      rgba(0, 0, 0, 0.1) 100%);
 }
 
 /* ==============================================================================
@@ -232,6 +271,7 @@ body {
 }
 
 @media (max-width: 1023px) {
+
   #design-planning,
   #construction-building,
   #construction-structural,
@@ -243,6 +283,7 @@ body {
 }
 
 @media (max-width: 639px) {
+
   #design-planning,
   #construction-building,
   #construction-structural,
